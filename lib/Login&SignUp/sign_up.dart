@@ -33,7 +33,7 @@ size:100,
         ),
         SizedBox(height:10),
            Text(
-          'We Hope taste all the deliciousness',
+          'We Hope you taste all the deliciousness',
           style: TextStyle(
             fontSize: 20,
             ),
