@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "16189693878",
+    "project_id": "all-sweets",
+    "storage_bucket": "all-sweets.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16189693878:android:3618bd87fa07e78db76b17",
+        "android_client_info": {
+          "package_name": "com.example.all_sweets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "16189693878-givvs3cmmvf5r8s3ctn7vn1hvpn42kih.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKbXOzTNJcou1hVZOqZVcUIqNeJxY5nso"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "16189693878-givvs3cmmvf5r8s3ctn7vn1hvpn42kih.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
