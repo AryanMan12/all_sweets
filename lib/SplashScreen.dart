@@ -12,11 +12,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink[300],
+      backgroundColor: Color.fromARGB(255, 156, 111, 74),
 body: Center(
   
   child: Lottie.network(
-    'https://assets6.lottiefiles.com/packages/lf20_2ho5h68l.json'
+    'https://assets9.lottiefiles.com/packages/lf20_mn4rw3s4.json'
     ),
 ),
     );
