@@ -94,7 +94,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => MyWidget())),
+                          builder: (context) => ItemCard())),
                   child: Container(
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
