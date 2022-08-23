@@ -64,7 +64,7 @@ flutter:
     - assets/icons/laddu_icon.png
     - assets/icons/samosa_icon.png
     - assets/icons/beverage_icon.png
-    -assets/images/product[0].jpg
+    - assets/images/product[0].jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
