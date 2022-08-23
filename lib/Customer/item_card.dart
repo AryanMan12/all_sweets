@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({Key? key}) : super(key: key);
+class ItemCard extends StatelessWidget {
+  const ItemCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ body:ListView(
         mainAxisSpacing: 15.0,
         childAspectRatio: 0.8,
         children: <Widget>[
-_buildCard("Gulab Jamun", "\ Rs.500", "assets/product[0].jpg", false, false, context)
+_buildCard("Gulab Jamun", "\ Rs.500", "assets/images/product[0].jpg", false, false, context)
         ],
         )
     ),
