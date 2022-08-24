@@ -17,7 +17,7 @@ class _SweetsPageState extends State<SweetsPage> {
         drawer: NavBar(),
         appBar: AppBar(
           backgroundColor: Colors.white,
-          automaticallyImplyLeading: false,
+          foregroundColor: Colors.black,
           title: Text(
             "Sweets",
             style: TextStyle(

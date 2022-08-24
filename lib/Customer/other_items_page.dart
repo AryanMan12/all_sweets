@@ -1,4 +1,5 @@
 import 'package:all_sweets/Customer/item_card.dart';
+import 'package:all_sweets/Customer/sidenavbar.dart';
 import 'package:flutter/material.dart';
 
 class OtherItemsPage extends StatefulWidget {
@@ -13,9 +14,10 @@ class _OtherItemsPageState extends State<OtherItemsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
+        drawer: NavBar(),
         appBar: AppBar(
           backgroundColor: Colors.white,
-          automaticallyImplyLeading: false,
+          foregroundColor: Colors.black,
           title: Text(
             "Other Items",
             style: TextStyle(

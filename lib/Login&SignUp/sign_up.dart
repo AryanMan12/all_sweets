@@ -45,7 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(height: 30),
 
               //First Name
-               Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Container(
                   decoration: BoxDecoration(
@@ -57,7 +57,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: TextField(
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Enter your first name',
+                        hintText: 'Enter your name',
                       ),
                     ),
                   ),
@@ -65,7 +65,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               SizedBox(height: 10),
               //Phone
- Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Container(
                   decoration: BoxDecoration(
@@ -85,7 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               SizedBox(height: 10),
               //Address
- Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Container(
                   decoration: BoxDecoration(
