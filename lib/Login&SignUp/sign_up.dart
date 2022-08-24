@@ -42,8 +42,68 @@ class _SignUpPageState extends State<SignUpPage> {
                   fontSize: 20,
                 ),
               ),
-              SizedBox(height: 50),
+              SizedBox(height: 30),
 
+              //First Name
+               Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Enter your first name',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              //Last Name
+ Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Enter your last name',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              //Address
+ Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Enter your address',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
               //Email
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -87,7 +147,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               SizedBox(height: 10),
 
-              //Sign-in
+              //Sign-up
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: InkWell(
@@ -103,7 +163,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     child: Center(
                       child: Text(
-                        'Sign in',
+                        'Sign up',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -121,13 +181,13 @@ class _SignUpPageState extends State<SignUpPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Not a member?',
+                    'Already a member?',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    ' Register Now!',
+                    ' Login Now!',
                     style: TextStyle(
                       color: Colors.deepPurple[500],
                       fontWeight: FontWeight.bold,
