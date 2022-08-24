@@ -26,17 +26,17 @@ class NavBar extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.favorite),
-            title: Text('Wishlist'),
+            title: Text('My Wishlist'),
             onTap: () => null,
           ),
           ListTile(
-            leading: Icon(Icons.people),
-            title: Text('My Account'),
-            onTap: () => null,
-          ),
-          ListTile(
-            leading: Icon(Icons.notifications),
+            leading: Icon(Icons.shopping_bag),
             title: Text('My Orders'),
+            onTap: () => null,
+          ),
+          ListTile(
+            leading: Icon(Icons.shopping_cart),
+            title: Text('My Cart'),
             onTap: () => null,
             trailing: ClipOval(
               child: Container(
@@ -57,8 +57,8 @@ class NavBar extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
+            leading: Icon(Icons.help),
+            title: Text('Help & Support'),
             onTap: () => null,
           ),
           ListTile(
