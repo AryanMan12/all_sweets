@@ -1,4 +1,5 @@
 import 'package:all_sweets/Customer/item_card.dart';
+import 'package:all_sweets/Customer/sidenavbar.dart';
 import 'package:flutter/material.dart';
 
 class SweetsPage extends StatefulWidget {
@@ -13,6 +14,7 @@ class _SweetsPageState extends State<SweetsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
+        drawer: NavBar(),
         appBar: AppBar(
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
