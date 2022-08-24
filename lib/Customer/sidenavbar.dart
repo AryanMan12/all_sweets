@@ -8,12 +8,12 @@ class NavBar extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text('All Sweets'), 
+            accountName: Text('All Sweets'),
             accountEmail: Text('allsweet@gmail.com'),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
-                child: Image.network(
-                  'https://in.pinterest.com/pin/492649950368019/',
+                child: Image.asset(
+                  "assets/images/product[0].jpg",
                   width: 90,
                   height: 90,
                   fit: BoxFit.cover,
@@ -21,13 +21,7 @@ class NavBar extends StatelessWidget {
               ),
             ),
             decoration: BoxDecoration(
-              color: Colors.deepPurple,
-              image: DecorationImage(
-                image: NetworkImage(
-                  'https://in.pinterest.com/pin/850265604642444047/',
-                ),
-                fit: BoxFit.cover,
-              ),
+              color: Colors.blue,
             ),
           ),
           ListTile(

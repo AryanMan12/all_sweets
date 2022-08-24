@@ -1,3 +1,6 @@
+import 'package:all_sweets/Customer/other_items_page.dart';
+import 'package:all_sweets/Customer/snacks_page.dart';
+import 'package:all_sweets/Customer/sweets_page.dart';
 import 'package:all_sweets/Login&SignUp/sign_up.dart';
 import 'package:flutter/material.dart';
 
@@ -11,15 +14,24 @@ class CustomerBottomNav extends StatefulWidget {
 class _CustomerBottomNavState extends State<CustomerBottomNav> {
   int pageNum = 0;
 
-  static const List<Widget> _Pages = <Widget>[SignUpPage()];
+  static const List<Widget> _Pages = <Widget>[
+    SweetsPage(),
+    SnacksPage(),
+    OtherItemsPage()
+  ];
+
+  void _onPageSelected(int index) {
+    setState(() {
+      pageNum = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        // child: _Pages.elementAt(pageNum),
-        child: Text("Hello World"),
+        child: _Pages.elementAt(pageNum),
       ),
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 30,
@@ -46,6 +58,7 @@ class _CustomerBottomNavState extends State<CustomerBottomNav> {
               backgroundColor: Colors.white),
         ],
         currentIndex: pageNum,
+        onTap: _onPageSelected,
       ),
     );
   }

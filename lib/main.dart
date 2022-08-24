@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Login&SignUp/login_main.dart';
 import 'SplashScreen.dart';
-//import 'Login&SignUp/sign_up.dart';
-import 'package:all_sweets/Customer/sidenavbar.dart';
 
 void main() {
   runApp(const MyApp());
