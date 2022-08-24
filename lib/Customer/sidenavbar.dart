@@ -13,7 +13,7 @@ class NavBar extends StatelessWidget {
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(
-                  'https://www.google.com/imgres?imgurl=https%3A%2F%2Fi.pinimg.com%2F736x%2F8f%2F50%2Ff2%2F8f50f2912d33e43d0d904b94fcb981b8.jpg&imgrefurl=https%3A%2F%2Fin.pinterest.com%2Fpin%2F815784919989095072%2F&tbnid=x7Vdo8Lb7xG23M&vet=12ahUKEwivp_OJu935AhVDjtgFHQptCnkQMyg0egQIARBI..i&docid=cNhPD_tYQx6GkM&w=735&h=960&q=professional%20profile%20image%20hd&hl=en&ved=2ahUKEwivp_OJu935AhVDjtgFHQptCnkQMyg0egQIARBI',
+                  'https://in.pinterest.com/pin/492649950368019/',
                   width: 90,
                   height: 90,
                   fit: BoxFit.cover,
@@ -21,7 +21,7 @@ class NavBar extends StatelessWidget {
               ),
             ),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.deepPurple,
               image: DecorationImage(
                 image: NetworkImage(
                   'https://in.pinterest.com/pin/850265604642444047/',
@@ -32,17 +32,17 @@ class NavBar extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.favorite),
-            title: Text('Favorites'),
+            title: Text('Wishlist'),
             onTap: () => null,
           ),
           ListTile(
             leading: Icon(Icons.people),
-            title: Text('Friends'),
+            title: Text('My Account'),
             onTap: () => null,
           ),
           ListTile(
             leading: Icon(Icons.notifications),
-            title: Text('Notifications'),
+            title: Text('My Orders'),
             onTap: () => null,
             trailing: ClipOval(
               child: Container(
@@ -68,8 +68,8 @@ class NavBar extends StatelessWidget {
             onTap: () => null,
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Exit'),
+            leading: Icon(Icons.logout),
+            title: Text('Logout'),
             onTap: () => null,
           ),
         ],
