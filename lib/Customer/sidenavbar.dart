@@ -30,37 +30,16 @@ class NavBar extends StatelessWidget {
             onTap: () => null,
           ),
           ListTile(
-            leading: Icon(Icons.people),
-            title: Text('My Account'),
+            leading: Icon(Icons.shopping_cart),
+            title: Text('Cart'),
             onTap: () => null,
           ),
           ListTile(
-            leading: Icon(Icons.notifications),
+            leading: Icon(Icons.shopping_bag),
             title: Text('My Orders'),
             onTap: () => null,
-            trailing: ClipOval(
-              child: Container(
-                color: Colors.red,
-                width: 20,
-                height: 20,
-                child: Center(
-                  child: Text(
-                    '8',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ),
-            ),
           ),
           Divider(),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
-            onTap: () => null,
-          ),
           ListTile(
             leading: Icon(Icons.logout),
             title: Text('Logout'),
