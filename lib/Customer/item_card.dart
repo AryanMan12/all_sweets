@@ -1,12 +1,22 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class ItemCard extends StatelessWidget {
+class ItemCard extends StatefulWidget {
   const ItemCard({Key? key}) : super(key: key);
+
+  @override
+  State<ItemCard> createState() => _ItemCardState();
+}
+
+class _ItemCardState extends State<ItemCard> {
   final String name = "Gulab Jamun";
+
   final String price = "Rs.500";
+
   final String imgPath = "assets/images/product[0].jpg";
+
   final bool added = false;
+
   final bool isFavourite = false;
 
   @override
