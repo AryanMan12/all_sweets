@@ -147,6 +147,28 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               SizedBox(height: 10),
 
+              //Confirm Password
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Confirm Password',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+
               //Sign-up
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -167,14 +189,14 @@ class _SignUpPageState extends State<SignUpPage> {
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          fontSize: 16,
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 25),
+              SizedBox(height: 20),
 
               //Not a member? Register Now!
               Row(
