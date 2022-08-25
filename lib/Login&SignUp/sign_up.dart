@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:all_sweets/Customer/card_horizontal.dart';
 import 'package:all_sweets/Customer/customer_main.dart';
 import 'package:all_sweets/Customer/item_card.dart';
 import 'package:all_sweets/Customer/item_detail.dart';
@@ -177,7 +178,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ItemDetail())),
+                          builder: (context) => CardHorizontal())),
                   child: Container(
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
