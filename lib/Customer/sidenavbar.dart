@@ -1,4 +1,6 @@
+import 'package:all_sweets/Customer/cart.dart';
 import 'package:all_sweets/Customer/customer_main.dart';
+import 'package:all_sweets/Customer/orders.dart';
 import 'package:all_sweets/Customer/wishlist.dart';
 import 'package:flutter/material.dart';
 
@@ -45,12 +47,14 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.shopping_cart),
             title: Text('Cart'),
-            onTap: () => null,
+            onTap: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => CartPage())),
           ),
           ListTile(
             leading: Icon(Icons.shopping_bag),
             title: Text('My Orders'),
-            onTap: () => null,
+            onTap: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => OrdersPage())),
           ),
           Divider(),
           ListTile(

@@ -29,7 +29,7 @@ class _OtherItemsPageState extends State<OtherItemsPage> {
           children: <Widget>[
             SizedBox(height: 2.0),
             Container(
-                padding: EdgeInsets.symmetric(vertical: 1, horizontal: 2),
+                padding: EdgeInsets.symmetric(vertical: 1, horizontal: 8),
                 width: MediaQuery.of(context).size.width - 30.0,
                 height: MediaQuery.of(context).size.height - 50.0,
                 child: GridView.count(
