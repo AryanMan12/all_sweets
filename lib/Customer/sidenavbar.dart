@@ -1,3 +1,5 @@
+import 'package:all_sweets/Customer/customer_main.dart';
+import 'package:all_sweets/Customer/wishlist.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
@@ -25,9 +27,20 @@ class NavBar extends StatelessWidget {
             ),
           ),
           ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () => Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CustomerBottomNav()),
+                    (Route<dynamic> route) => false,
+                  )),
+          Divider(),
+          ListTile(
             leading: Icon(Icons.favorite),
             title: Text('Wishlist'),
-            onTap: () => null,
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => WishListPage())),
           ),
           ListTile(
             leading: Icon(Icons.shopping_cart),

@@ -40,7 +40,6 @@ class _WishListPageState extends State<WishListPage> {
                   childAspectRatio: 0.8,
                   children: <Widget>[
                     ItemCard(),
-                    ItemCard(),
                   ],
                 )),
           ],
