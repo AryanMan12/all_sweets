@@ -1,3 +1,7 @@
+import 'package:all_sweets/Customer/cart.dart';
+import 'package:all_sweets/Customer/customer_main.dart';
+import 'package:all_sweets/Customer/orders.dart';
+import 'package:all_sweets/Customer/wishlist.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
@@ -25,21 +29,53 @@ class NavBar extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.favorite),
-            title: Text('Wishlist'),
-            onTap: () => null,
-          ),
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () => Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CustomerBottomNav()),
+                    (Route<dynamic> route) => false,
+                  )),
+          Divider(),
           ListTile(
-            leading: Icon(Icons.shopping_cart),
-            title: Text('Cart'),
+            leading: Icon(Icons.favorite),
+            title: Text('My Wishlist'),
             onTap: () => null,
           ),
           ListTile(
             leading: Icon(Icons.shopping_bag),
             title: Text('My Orders'),
+            onTap: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => OrdersPage())),
+          ),
+          ListTile(
+            leading: Icon(Icons.shopping_cart),
+            title: Text('My Cart'),
             onTap: () => null,
+            trailing: ClipOval(
+              child: Container(
+                color: Colors.red,
+                width: 20,
+                height: 20,
+                child: Center(
+                  child: Text(
+                    '8',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ),
           Divider(),
+          ListTile(
+            leading: Icon(Icons.help),
+            title: Text('Help & Support'),
+            onTap: () => null,
+          ),
           ListTile(
             leading: Icon(Icons.logout),
             title: Text('Logout'),

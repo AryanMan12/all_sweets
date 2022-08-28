@@ -2,10 +2,14 @@ import 'dart:ui';
 
 import 'package:all_sweets/Customer/card_horizontal.dart';
 import 'package:all_sweets/Customer/customer_main.dart';
+<<<<<<< HEAD
 import 'package:all_sweets/Customer/item_card.dart';
 import 'package:all_sweets/Customer/item_detail.dart';
 import 'package:all_sweets/Customer/sidenavbar.dart';
 import 'package:all_sweets/Owner/product.dart';
+=======
+import 'package:all_sweets/Owner/owner_main.dart';
+>>>>>>> fba43ac2b47825866e67652b25a0a28be1666830
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -176,8 +180,15 @@ class _SignUpPageState extends State<SignUpPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: InkWell(
+<<<<<<< HEAD
                   onTap: () => Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Products())),
+=======
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => OwnerBottomNav())),
+>>>>>>> fba43ac2b47825866e67652b25a0a28be1666830
                   child: Container(
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
