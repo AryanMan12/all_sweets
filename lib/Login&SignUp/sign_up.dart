@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:all_sweets/Customer/card_horizontal.dart';
 import 'package:all_sweets/Customer/customer_main.dart';
+import 'package:all_sweets/Owner/order_list.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -175,7 +176,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => CustomerBottomNav())),
+                          builder: (context) => OrderList())),
                   child: Container(
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
