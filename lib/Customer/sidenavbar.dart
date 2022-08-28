@@ -40,15 +40,8 @@ class NavBar extends StatelessWidget {
           Divider(),
           ListTile(
             leading: Icon(Icons.favorite),
-            title: Text('Wishlist'),
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => WishListPage())),
-          ),
-          ListTile(
-            leading: Icon(Icons.shopping_cart),
-            title: Text('Cart'),
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => CartPage())),
+            title: Text('My Wishlist'),
+            onTap: () => null,
           ),
           ListTile(
             leading: Icon(Icons.shopping_bag),
@@ -56,7 +49,33 @@ class NavBar extends StatelessWidget {
             onTap: () => Navigator.push(
                 context, MaterialPageRoute(builder: (context) => OrdersPage())),
           ),
+          ListTile(
+            leading: Icon(Icons.shopping_cart),
+            title: Text('My Cart'),
+            onTap: () => null,
+            trailing: ClipOval(
+              child: Container(
+                color: Colors.red,
+                width: 20,
+                height: 20,
+                child: Center(
+                  child: Text(
+                    '8',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
           Divider(),
+          ListTile(
+            leading: Icon(Icons.help),
+            title: Text('Help & Support'),
+            onTap: () => null,
+          ),
           ListTile(
             leading: Icon(Icons.logout),
             title: Text('Logout'),
