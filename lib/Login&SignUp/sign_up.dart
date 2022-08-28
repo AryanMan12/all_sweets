@@ -180,7 +180,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: Container(
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Colors.deepPurple[600],
+                      color: Colors.deepPurple[400],
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Center(
