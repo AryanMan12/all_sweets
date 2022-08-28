@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:all_sweets/Customer/customer_main.dart';
 import 'package:all_sweets/Customer/item_card.dart';
-import 'package:all_sweets/Customer/profile_page.dart';
+import 'package:all_sweets/Customer/item_detail.dart';
 import 'package:all_sweets/Customer/sidenavbar.dart';
 import 'package:flutter/material.dart';
 
@@ -177,7 +177,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => NavBar())),
+                          builder: (context) => ItemDetail())),
                   child: Container(
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
