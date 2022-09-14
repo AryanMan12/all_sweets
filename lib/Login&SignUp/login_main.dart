@@ -1,3 +1,4 @@
+import 'package:all_sweets/Login&SignUp/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -82,7 +83,7 @@ class _LoginState extends State<Login> {
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
                       controller: passwordController,
-                      // obscureText: true,
+                      obscureText: true,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Password',
@@ -125,16 +126,22 @@ class _LoginState extends State<Login> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Forgotten your login details?',
+                    'Want to create an Account?',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    ' Get help with logging in.',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
+                  InkWell(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => SignUpPage()))),
+                    child: Text(
+                      ' Sign Up Here!!',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
