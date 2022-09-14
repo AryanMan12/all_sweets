@@ -32,6 +32,7 @@ dependencies:
 
   # Firebase
   cloud_firestore: ^3.4.5
+  firebase_auth: ^3.8.0
 
   # Charts for data representation
   fl_chart: ^0.55.1

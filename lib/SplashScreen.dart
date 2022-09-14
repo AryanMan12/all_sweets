@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:all_sweets/Customer/customer_main.dart';
+import 'package:all_sweets/Login&SignUp/login_main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -19,7 +22,20 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 5),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => SignUpPage())));
+              context,
+              MaterialPageRoute(
+                builder: (context) => StreamBuilder<User?>(
+                  stream: FirebaseAuth.instance.authStateChanges(),
+                  builder: ((context, snapshot) {
+                    if (snapshot.hasData) {
+                      return CustomerBottomNav();
+                    } else {
+                      return Login();
+                    }
+                  }),
+                ),
+              ),
+            ));
   }
 
   @override

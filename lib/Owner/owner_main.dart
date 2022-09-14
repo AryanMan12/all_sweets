@@ -1,5 +1,6 @@
+import 'package:all_sweets/Owner/daily_khata.dart';
 import 'package:all_sweets/Owner/dashboard.dart';
-import 'package:all_sweets/TemporaryWorkers/order_status.dart';
+import 'package:all_sweets/Owner/order_list.dart';
 import 'package:flutter/material.dart';
 
 class OwnerBottomNav extends StatefulWidget {
@@ -12,7 +13,12 @@ class OwnerBottomNav extends StatefulWidget {
 class _OwnerBottomNavState extends State<OwnerBottomNav> {
   int pageNum = 0;
 
-  static const List<Widget> _Pages = <Widget>[OrderStat()];
+  static const List<Widget> _Pages = <Widget>[
+    Dashboard(),
+    DailyKhata(),
+    Text("Page 3"),
+    OrderList()
+  ];
 
   void _onPageSelected(int index) {
     setState(() {

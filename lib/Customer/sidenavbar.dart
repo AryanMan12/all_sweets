@@ -2,6 +2,7 @@ import 'package:all_sweets/Customer/cart.dart';
 import 'package:all_sweets/Customer/customer_main.dart';
 import 'package:all_sweets/Customer/orders.dart';
 import 'package:all_sweets/Customer/wishlist.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
@@ -79,7 +80,7 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.logout),
             title: Text('Logout'),
-            onTap: () => null,
+            onTap: () => FirebaseAuth.instance.signOut(),
           ),
         ],
       ),
