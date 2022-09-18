@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 5), () {
-      if (FirebaseAuth.instance.currentUser == Null) {
+      if (FirebaseAuth.instance.currentUser == null) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Login()));
       } else {
@@ -47,7 +47,6 @@ class _SplashScreenState extends State<SplashScreen> {
           }
         });
       }
-      ;
     });
   }
 
