@@ -111,7 +111,7 @@ class _LoginState extends State<Login> {
                       child: Container(
                         padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                            color: Colors.deepPurple,
+                            color: Colors.brown,
                             borderRadius: BorderRadius.circular(12)),
                         child: Center(
                           child: Text(

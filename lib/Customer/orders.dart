@@ -16,7 +16,7 @@ class _OrdersPageState extends State<OrdersPage> {
         backgroundColor: Colors.white,
         drawer: NavBar(),
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.brown[400],
           foregroundColor: Colors.black,
           title: Text(
             "My Orders",

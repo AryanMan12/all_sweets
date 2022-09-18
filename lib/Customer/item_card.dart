@@ -19,6 +19,8 @@ class _ItemCardState extends State<ItemCard> {
 
   final bool isFavourite = false;
 
+  bool click = true;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -43,10 +45,19 @@ class _ItemCardState extends State<ItemCard> {
                   padding: EdgeInsets.all(5.0),
                   child:
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    isFavourite
-                        ? Icon(Icons.favorite, color: Colors.deepPurple[400])
-                        : Icon(Icons.favorite_border,
-                            color: Colors.deepPurple[400])
+                    FlatButton(
+                      onPressed: () {
+                        setState(() {
+                          click = !click;
+                        });
+                      },
+                      child: Icon(
+                        (click == false)
+                            ? Icons.favorite_border_outlined
+                            : Icons.favorite,
+                        color: Colors.brown,
+                      ),
+                    )
                   ])),
               Hero(
                   tag: Null,
@@ -78,7 +89,7 @@ class _ItemCardState extends State<ItemCard> {
                     children: [
                       if (!added) ...[
                         Icon(Icons.shopping_basket,
-                            color: Colors.deepPurple[400], size: 12.0),
+                            color: Colors.brown[400], size: 12.0),
                         Text('Add to cart',
                             style: TextStyle(
                                 color: Colors.black,
@@ -87,7 +98,7 @@ class _ItemCardState extends State<ItemCard> {
                       ],
                       if (added) ...[
                         Icon(Icons.remove_circle_outline,
-                            color: Colors.deepPurple[400], size: 12.0),
+                            color: Colors.brown[400], size: 12.0),
                         Text('Remove from cart',
                             style: TextStyle(
                                 color: Colors.black,

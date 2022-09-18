@@ -15,14 +15,14 @@ class _OrderStatState extends State<OrderStat> {
       padding: EdgeInsets.all(10),
       child: Column(
         children: [
-          _orderStats("completed"),
+          _orderStats("Delivered"),
           Divider(color: Colors.grey),
           SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               iconText(
-                Icon(Icons.edit, color: Colors.deepPurple),
+                Icon(Icons.edit, color: Colors.brown),
                 Text(
                   "Order Id",
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
@@ -39,7 +39,7 @@ class _OrderStatState extends State<OrderStat> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               iconText(
-                Icon(Icons.today, color: Colors.deepPurple),
+                Icon(Icons.today, color: Colors.brown),
                 Text(
                   "Order Date",
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
@@ -99,7 +99,7 @@ class _OrderStatState extends State<OrderStat> {
     if (status == "pending" || status == "processing" || status == "on-hold") {
       icon = Icon(Icons.timer, color: Colors.orange);
       color = Colors.orange;
-    } else if (status == "completed") {
+    } else if (status == "Delivered") {
       icon = Icon(Icons.check, color: Colors.green);
       color = Colors.green;
     } else if (status == "cancelled" || status == "failed") {

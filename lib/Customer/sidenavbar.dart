@@ -26,7 +26,7 @@ class NavBar extends StatelessWidget {
               ),
             ),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.brown,
             ),
           ),
           ListTile(
