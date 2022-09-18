@@ -1,3 +1,4 @@
+import 'package:all_sweets/Owner/Product_add.dart';
 import 'package:all_sweets/Owner/daily_khata.dart';
 import 'package:all_sweets/Owner/dashboard.dart';
 import 'package:all_sweets/Owner/order_list.dart';
@@ -16,8 +17,9 @@ class _OwnerBottomNavState extends State<OwnerBottomNav> {
   static const List<Widget> _Pages = <Widget>[
     Dashboard(),
     DailyKhata(),
-    Text("Page 3"),
-    OrderList()
+    Text("Billing Page"),
+    OrderList(),
+    AddProducts()
   ];
 
   void _onPageSelected(int index) {
@@ -55,6 +57,10 @@ class _OwnerBottomNavState extends State<OwnerBottomNav> {
               backgroundColor: Colors.white),
           BottomNavigationBarItem(
               icon: Icon(Icons.table_chart, size: 28),
+              label: '',
+              backgroundColor: Colors.white),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.playlist_add, size: 28),
               label: '',
               backgroundColor: Colors.white),
         ],
