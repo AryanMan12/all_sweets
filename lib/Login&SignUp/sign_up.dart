@@ -203,7 +203,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: Container(
                         padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: Colors.deepPurple[400],
+                          color: Colors.brown[400],
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Center(
@@ -237,7 +237,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: Text(
                           ' Login Now!',
                           style: TextStyle(
-                            color: Colors.deepPurple[500],
+                            color: Colors.blue,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

@@ -103,7 +103,7 @@ class _LoginState extends State<Login> {
                   child: Container(
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                        color: Colors.deepPurple,
+                        color: Colors.brown,
                         borderRadius: BorderRadius.circular(12)),
                     child: Center(
                       child: Text(
@@ -137,7 +137,7 @@ class _LoginState extends State<Login> {
                         MaterialPageRoute(
                             builder: ((context) => SignUpPage()))),
                     child: Text(
-                      ' Sign Up Here!!',
+                      ' Sign Up Here!',
                       style: TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.bold,

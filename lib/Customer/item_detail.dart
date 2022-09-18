@@ -14,6 +14,11 @@ class _ItemDetailState extends State<ItemDetail> {
 
   final String details =
       "Gulab jamun is a sweet confectionary or dessert, originating in the Indian subcontinent";
+
+  bool click = true;
+
+  int count = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,8 +90,17 @@ class _ItemDetailState extends State<ItemDetail> {
                             ),
                           ),
                           InkWell(
-                            child: Icon(Icons.favorite_border_outlined,
-                                color: Colors.deepPurple),
+                            onTap: () {
+                              setState(() {
+                                click = !click;
+                              });
+                            },
+                            child: Icon(
+                              (click == false)
+                                  ? Icons.favorite_border_outlined
+                                  : Icons.favorite,
+                              color: Colors.brown,
+                            ),
                           ),
                         ],
                       ),
@@ -130,57 +144,36 @@ class _ItemDetailState extends State<ItemDetail> {
                     ),
                     Expanded(
                       child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 29,
-                              width: 29,
-                              decoration: BoxDecoration(
-                                  color: Colors.deepPurple[300],
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Center(
-                                child: Text(
-                                  '-',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontFamily: 'Varela',
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.grey),
-                                ),
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          FloatingActionButton(
+                              backgroundColor: Colors.brown,
+                              child: Icon(
+                                Icons.add,
+                                color: Colors.white,
                               ),
-                            ),
-                            Container(
-                              height: 29,
-                              width: 29,
-                              child: Center(
-                                child: Text(
-                                  '1',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontFamily: 'Varela',
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),
+                              onPressed: () {
+                                setState(() {
+                                  count++;
+                                });
+                              }),
+                          Text("${count}"),
+                          FloatingActionButton(
+                              backgroundColor: Colors.brown,
+                              child: Icon(
+                                Icons.remove,
+                                color: Colors.white,
                               ),
-                            ),
-                            Container(
-                              height: 29,
-                              width: 29,
-                              decoration: BoxDecoration(
-                                  color: Colors.deepPurple,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Center(
-                                child: Text(
-                                  '+',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontFamily: 'Varela',
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),
-                              ),
-                            ),
-                          ]),
+                              onPressed: () {
+                                if (count < 1) {
+                                  return;
+                                }
+                                setState(() {
+                                  count--;
+                                });
+                              }),
+                        ],
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 15),
@@ -195,7 +188,7 @@ class _ItemDetailState extends State<ItemDetail> {
                                   height: 45,
                                   width: 129,
                                   decoration: BoxDecoration(
-                                      color: Colors.deepPurple,
+                                      color: Colors.brown,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Center(
                                     child: Text(
@@ -212,7 +205,7 @@ class _ItemDetailState extends State<ItemDetail> {
                                 height: 45,
                                 width: 129,
                                 decoration: BoxDecoration(
-                                    color: Colors.deepPurple,
+                                    color: Colors.brown,
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Center(
                                   child: Text(

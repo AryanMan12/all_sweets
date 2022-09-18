@@ -21,25 +21,26 @@ class _ProductsState extends State<Products> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Product"),
-        backgroundColor: Colors.deepPurple[400],
+        title: const Text("Products"),
+        backgroundColor: Colors.brown,
       ),
       body: Padding(
           padding: const EdgeInsets.all(7.0),
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                padding: const EdgeInsets.symmetric(horizontal: 45.0),
                 child: InkWell(
                   onTap: () => Navigator.push(context,
                       MaterialPageRoute(builder: (context) => AddProducts())),
                   child: Container(
-                    padding: EdgeInsets.all(14),
+                    padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Colors.deepPurple[400],
-                      borderRadius: BorderRadius.circular(20),
+                      color: Color.fromARGB(255, 97, 61, 48),
+                      borderRadius: BorderRadius.circular(50),
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
                             onPressed: () {},
@@ -50,7 +51,7 @@ class _ProductsState extends State<Products> {
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                            fontSize: 27,
                           ),
                         ),
                       ],
@@ -106,10 +107,10 @@ class _ProductsState extends State<Products> {
                               ButtonBar(
                                 children: [
                                   Icon(Icons.edit_note,
-                                      color: Colors.deepPurple[200]),
+                                      color: Colors.brown[300]),
                                   Icon(
                                     Icons.delete_outline,
-                                    color: Colors.deepPurple[200],
+                                    color: Colors.brown[300],
                                   )
                                 ],
                               )
@@ -160,11 +161,11 @@ class _ProductsState extends State<Products> {
                                 children: [
                                   Icon(
                                     Icons.edit_note,
-                                    color: Colors.deepPurple[200],
+                                    color: Colors.brown[300],
                                   ),
                                   Icon(
                                     Icons.delete_outline,
-                                    color: Colors.deepPurple[200],
+                                    color: Colors.brown[300],
                                   )
                                 ],
                               )

@@ -14,7 +14,7 @@ class _AddProductsState extends State<AddProducts> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add a New Product"),
-        backgroundColor: Colors.deepPurple[400],
+        backgroundColor: Colors.brown[400],
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
@@ -25,7 +25,7 @@ class _AddProductsState extends State<AddProducts> {
               height: 60,
               width: 220,
               child: Card(
-                  color: Colors.deepPurple[400],
+                  color: Colors.brown[400],
                   child: Row(
                     children: [
                       IconButton(
@@ -127,7 +127,7 @@ class _AddProductsState extends State<AddProducts> {
                 child: Container(
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.deepPurple[400],
+                    color: Colors.brown[400],
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Center(

@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:all_sweets/Customer/customer_main.dart';
+import 'package:all_sweets/Customer/orders.dart';
 import 'package:all_sweets/Login&SignUp/login_main.dart';
+import 'package:all_sweets/Owner/dashboard.dart';
+import 'package:all_sweets/Owner/product.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
