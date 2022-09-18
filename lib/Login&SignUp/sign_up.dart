@@ -5,6 +5,7 @@ import 'package:all_sweets/Customer/card_horizontal.dart';
 import 'package:all_sweets/Customer/customer_main.dart';
 import 'package:all_sweets/Login&SignUp/login_main.dart';
 import 'package:all_sweets/Owner/order_list.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,10 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  CollectionReference customers =
+      FirebaseFirestore.instance.collection("Customer");
+  CollectionReference users = FirebaseFirestore.instance.collection("Users");
+
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
   final addressController = TextEditingController();
@@ -198,6 +203,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   //Sign-up
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
+<<<<<<< HEAD
                     child: InkWell(
                       onTap: () => signUp,
                       child: Container(
@@ -206,6 +212,16 @@ class _SignUpPageState extends State<SignUpPage> {
                           color: Colors.brown[400],
                           borderRadius: BorderRadius.circular(20),
                         ),
+=======
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.deepPurple[400],
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: InkWell(
+                        onTap: signUp,
+>>>>>>> 4766c056f2354beacc9bb8ba34cd1529facaf117
                         child: Center(
                           child: Text(
                             'Sign up',
@@ -254,13 +270,13 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Future signUp() async {
-    log("Helllllo");
     String _name = nameController.text.trim();
     String _phone = phoneController.text.trim();
     String _address = addressController.text.trim();
     String _email = emailController.text.trim();
     String _password = passwordController.text.trim();
     String _cpassword = cPasswordController.text.trim();
+    bool isAvail = await checkIfDocExists(_email);
 
     if (_name.isEmpty ||
         _phone.isEmpty ||
@@ -276,13 +292,39 @@ class _SignUpPageState extends State<SignUpPage> {
     } else if (_password != _cpassword) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Password did not Match")));
+    } else if (isAvail) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Email Already Exsists")));
     } else {
+      users.doc(_email).set({
+        "email": _email,
+        "type": "customer",
+      });
+      customers
+          .doc(_email)
+          .set({
+            "email": _email,
+            "name": _name,
+            "phone": _phone,
+            "address": _address
+          })
+          .then((value) => log("User Created"))
+          .catchError((e) => log(e));
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: _email, password: _password)
           .then((value) => Navigator.push(context,
               MaterialPageRoute(builder: ((context) => CustomerBottomNav()))))
           .onError((error, stackTrace) => ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(error.toString()))));
+    }
+  }
+
+  Future<bool> checkIfDocExists(String docId) async {
+    try {
+      var doc = await users.doc(docId).get();
+      return doc.exists;
+    } catch (e) {
+      throw e;
     }
   }
 }

@@ -1,7 +1,12 @@
+import 'dart:developer';
+
 import 'package:all_sweets/Login&SignUp/sign_up.dart';
+import 'package:all_sweets/Owner/owner_main.dart';
+import 'package:all_sweets/RegularWorkers/regular_main.dart';
+import 'package:all_sweets/TemporaryWorkers/temporary_main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../Customer/customer_main.dart';
 
 class Login extends StatefulWidget {
@@ -12,6 +17,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  CollectionReference users = FirebaseFirestore.instance.collection("Users");
+  String type = '';
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   @override
@@ -152,12 +160,54 @@ class _LoginState extends State<Login> {
   }
 
   Future signIn() async {
-    await FirebaseAuth.instance
-        .signInWithEmailAndPassword(
-            email: emailController.text.trim(),
-            password: passwordController.text.trim())
-        .then((value) => Navigator.push(context,
-            MaterialPageRoute(builder: ((context) => CustomerBottomNav()))))
-        .onError((error, stackTrace) => print("Error ${error}"));
+    String _email = emailController.text.trim();
+    String _password = passwordController.text.trim();
+    bool isAvail = await checkIfDocExists(_email);
+
+    if (!isAvail) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Email Doesn't Exsists")));
+    } else {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: _email, password: _password)
+          .then((value) {
+        fetchAllContact(_email).then((value) {
+          setState(() {
+            type = value;
+          });
+        });
+        if (type == "customer") {
+          Navigator.push(context,
+              MaterialPageRoute(builder: ((context) => CustomerBottomNav())));
+        } else if (type == "owner") {
+          Navigator.push(context,
+              MaterialPageRoute(builder: ((context) => OwnerBottomNav())));
+        } else if (type == "worker") {
+          Navigator.push(context,
+              MaterialPageRoute(builder: ((context) => RegularWorker())));
+        } else if (type == "tempworker") {
+          Navigator.push(
+              context, MaterialPageRoute(builder: ((context) => TempWorker())));
+        }
+      });
+    }
+  }
+
+  Future<String> fetchAllContact(email) async {
+    String type = "";
+    Map<String, dynamic> doc;
+    DocumentSnapshot documentSnapshot = await users.doc(email).get();
+    doc = documentSnapshot.data() as Map<String, dynamic>;
+    type = doc.values.first;
+    return type;
+  }
+
+  Future<bool> checkIfDocExists(String docId) async {
+    try {
+      var doc = await users.doc(docId).get();
+      return doc.exists;
+    } catch (e) {
+      throw e;
+    }
   }
 }
