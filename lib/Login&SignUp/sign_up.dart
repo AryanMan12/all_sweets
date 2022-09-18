@@ -203,25 +203,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   //Sign-up
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
-<<<<<<< HEAD
-                    child: InkWell(
-                      onTap: () => signUp,
-                      child: Container(
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.brown[400],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-=======
                     child: Container(
                       padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: Colors.deepPurple[400],
+                        color: Colors.brown[400],
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: InkWell(
                         onTap: signUp,
->>>>>>> 4766c056f2354beacc9bb8ba34cd1529facaf117
                         child: Center(
                           child: Text(
                             'Sign up',
