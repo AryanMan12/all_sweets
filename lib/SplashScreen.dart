@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:all_sweets/Customer/customer_main.dart';
-import 'package:all_sweets/Customer/orders.dart';
 import 'package:all_sweets/Login&SignUp/login_main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
