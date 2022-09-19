@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import 'package:all_sweets/Owner/product.dart';
 import 'package:flutter/material.dart';
@@ -15,27 +16,20 @@ class _AddProductsState extends State<AddProducts> {
   final String imgPath = "assets/images/product[0].jpg";
   final picker = ImagePicker();
   PickedFile? pickedImage;
-  late File ImageFile;
+  late File imageFile;
   bool _load = true;
 
   Future chooseImage(ImageSource source) async {
     final pickedFile = await picker.pickImage(source: source);
+    Navigator.pop(context);
     setState(() {
-      ImageFile = File(pickedFile!.path);
       _load = false;
+      if (pickedFile == null) {
+        return;
+      } else {
+        imageFile = File(pickedFile.path);
+      }
     });
-  }
-
-  _openGallery() async {
-    ImagePicker picker = ImagePicker();
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    Navigator.of(context).pop;
-  }
-
-  _openCamera() async {
-    ImagePicker picker = ImagePicker();
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
-    Navigator.of(context).pop;
   }
 
   Future<void> _showChoiceDialog(BuildContext context) {
@@ -50,14 +44,14 @@ class _AddProductsState extends State<AddProducts> {
                   GestureDetector(
                     child: Text("Gallery"),
                     onTap: () {
-                      _openGallery();
+                      chooseImage(ImageSource.gallery);
                     },
                   ),
                   Padding(padding: EdgeInsets.all(8)),
                   GestureDetector(
                     child: Text("Camera"),
                     onTap: () {
-                      _openCamera();
+                      chooseImage(ImageSource.camera);
                     },
                   )
                 ],
@@ -76,160 +70,162 @@ class _AddProductsState extends State<AddProducts> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 60,
-              width: 220,
-              child: Card(
-                  color: Colors.brown[400],
-                  child: Row(
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            _showChoiceDialog(context);
-                          },
-                          icon: const Icon(Icons.add),
-                          color: Colors.black),
-                      const Text(
-                        'Add an Image',
-                        style: TextStyle(
-                            fontFamily: 'Varela',
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black,
-                            fontSize: 25.0),
-                      ),
-                    ],
-                  )),
-            ),
-            Container(
-              child: _load == false
-                  ? Container(
-                      height: 200,
-                      width: 200,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: FileImage(ImageFile),
+        child: ListView(children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 60,
+                width: 220,
+                child: Card(
+                    color: Colors.brown[400],
+                    child: Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              _showChoiceDialog(context);
+                            },
+                            icon: const Icon(Icons.add),
+                            color: Colors.black),
+                        const Text(
+                          'Add an Image',
+                          style: TextStyle(
+                              fontFamily: 'Varela',
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                              fontSize: 25.0),
+                        ),
+                      ],
+                    )),
+              ),
+              Container(
+                child: _load == false
+                    ? Container(
+                        height: 200,
+                        width: 200,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: FileImage(imageFile),
+                            ),
+                            borderRadius: BorderRadius.circular(20)),
+                        padding: const EdgeInsets.all(15.0),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.asset(
+                            imgPath,
+                            height: 250.0,
+                            width: 300.0,
+                            fit: BoxFit.cover,
                           ),
-                          borderRadius: BorderRadius.circular(20)),
-                      padding: const EdgeInsets.all(15.0),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Image.asset(
-                          imgPath,
-                          height: 250.0,
-                          width: 300.0,
-                          fit: BoxFit.cover,
+                        ),
+                      ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Enter Product name',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Enter Product details',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Enter Quantity',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Enter Product Price',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: InkWell(
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Products())),
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.brown[400],
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Save',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
                         ),
                       ),
                     ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(12)),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Enter Product name',
-                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(12)),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Enter Product details',
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(12)),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Enter Quantity',
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(12)),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Enter Product Price',
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: InkWell(
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Products())),
-                child: Container(
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.brown[400],
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Save',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ]),
       ),
     );
   }
