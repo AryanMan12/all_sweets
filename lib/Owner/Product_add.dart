@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'package:all_sweets/Owner/product.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -13,11 +15,21 @@ class AddProducts extends StatefulWidget {
 }
 
 class _AddProductsState extends State<AddProducts> {
-  final String imgPath = "assets/images/product[0].jpg";
+  String imgPath = "assets/images/product[0].jpg";
   final picker = ImagePicker();
   PickedFile? pickedImage;
   late File imageFile;
   bool _load = true;
+  CollectionReference products =
+      FirebaseFirestore.instance.collection("Products");
+
+  _AddProductsState() {
+    imageFile = File(imgPath);
+  }
+  final nameController = TextEditingController();
+  final priceController = TextEditingController();
+  final quantController = TextEditingController();
+  final detailsController = TextEditingController();
 
   Future chooseImage(ImageSource source) async {
     final pickedFile = await picker.pickImage(source: source);
@@ -87,13 +99,16 @@ class _AddProductsState extends State<AddProducts> {
                             },
                             icon: const Icon(Icons.add),
                             color: Colors.black),
-                        const Text(
-                          'Add an Image',
-                          style: TextStyle(
-                              fontFamily: 'Varela',
-                              fontWeight: FontWeight.normal,
-                              color: Colors.black,
-                              fontSize: 25.0),
+                        InkWell(
+                          onTap: () => _showChoiceDialog(context),
+                          child: const Text(
+                            'Add an Image',
+                            style: TextStyle(
+                                fontFamily: 'Varela',
+                                fontWeight: FontWeight.normal,
+                                color: Colors.black,
+                                fontSize: 25.0),
+                          ),
                         ),
                       ],
                     )),
@@ -133,6 +148,7 @@ class _AddProductsState extends State<AddProducts> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
+                      controller: nameController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Enter Product name',
@@ -152,6 +168,7 @@ class _AddProductsState extends State<AddProducts> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
+                      controller: detailsController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Enter Product details',
@@ -171,6 +188,7 @@ class _AddProductsState extends State<AddProducts> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
+                      controller: quantController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Enter Quantity',
@@ -190,6 +208,7 @@ class _AddProductsState extends State<AddProducts> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
+                      controller: priceController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Enter Product Price',
@@ -210,13 +229,16 @@ class _AddProductsState extends State<AddProducts> {
                       color: Colors.brown[400],
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Center(
-                      child: Text(
-                        'Save',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                    child: InkWell(
+                      onTap: onSave,
+                      child: Center(
+                        child: Text(
+                          'Save',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ),
@@ -228,5 +250,29 @@ class _AddProductsState extends State<AddProducts> {
         ]),
       ),
     );
+  }
+
+  Future<void> onSave() async {
+    final storageRef = FirebaseStorage.instance.ref("Product Images/");
+    String name = nameController.text.trim();
+    await storageRef.child("$name.jpg").putFile(imageFile);
+    String imgUrl = await storageRef.child("$name.jpg").getDownloadURL();
+    String quant = quantController.text.trim();
+    String price = priceController.text.trim();
+    String details = detailsController.text.trim();
+
+    await products
+        .doc(name)
+        .set({
+          "name": name,
+          "details": details,
+          "price": price,
+          "quantity": quant,
+          "image_url": imgUrl
+        })
+        .then((value) => ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Product Added"))))
+        .onError((error, stackTrace) => ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Failed to Add Data"))));
   }
 }
