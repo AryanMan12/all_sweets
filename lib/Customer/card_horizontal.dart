@@ -1,3 +1,4 @@
+import 'package:all_sweets/Owner/Product_add.dart';
 import 'package:flutter/material.dart';
 
 import 'item_detail.dart';
@@ -32,8 +33,8 @@ class _CardHorizontalState extends State<CardHorizontal> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           child: InkWell(
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => ItemDetail())),
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AddProducts())),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,

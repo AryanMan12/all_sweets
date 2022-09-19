@@ -1,5 +1,8 @@
+import 'dart:async';
+import 'dart:io';
 import 'package:all_sweets/Owner/product.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddProducts extends StatefulWidget {
   const AddProducts({Key? key}) : super(key: key);
@@ -9,6 +12,61 @@ class AddProducts extends StatefulWidget {
 }
 
 class _AddProductsState extends State<AddProducts> {
+  final String imgPath = "assets/images/product[0].jpg";
+  final picker = ImagePicker();
+  PickedFile? pickedImage;
+  late File ImageFile;
+  bool _load = true;
+
+  Future chooseImage(ImageSource source) async {
+    final pickedFile = await picker.pickImage(source: source);
+    setState(() {
+      ImageFile = File(pickedFile!.path);
+      _load = false;
+    });
+  }
+
+  _openGallery() async {
+    ImagePicker picker = ImagePicker();
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    Navigator.of(context).pop;
+  }
+
+  _openCamera() async {
+    ImagePicker picker = ImagePicker();
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    Navigator.of(context).pop;
+  }
+
+  Future<void> _showChoiceDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Choose an option"),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  GestureDetector(
+                    child: Text("Gallery"),
+                    onTap: () {
+                      _openGallery();
+                    },
+                  ),
+                  Padding(padding: EdgeInsets.all(8)),
+                  GestureDetector(
+                    child: Text("Camera"),
+                    onTap: () {
+                      _openCamera();
+                    },
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +87,9 @@ class _AddProductsState extends State<AddProducts> {
                   child: Row(
                     children: [
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _showChoiceDialog(context);
+                          },
                           icon: const Icon(Icons.add),
                           color: Colors.black),
                       const Text(
@@ -42,6 +102,31 @@ class _AddProductsState extends State<AddProducts> {
                       ),
                     ],
                   )),
+            ),
+            Container(
+              child: _load == false
+                  ? Container(
+                      height: 200,
+                      width: 200,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: FileImage(ImageFile),
+                          ),
+                          borderRadius: BorderRadius.circular(20)),
+                      padding: const EdgeInsets.all(15.0),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: Image.asset(
+                          imgPath,
+                          height: 250.0,
+                          width: 300.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),

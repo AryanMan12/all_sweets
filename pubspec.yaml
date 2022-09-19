@@ -29,6 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  image_picker:
 
   # Firebase
   cloud_firestore: ^3.4.5
