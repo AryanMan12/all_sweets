@@ -149,18 +149,6 @@ class _ItemDetailState extends State<ItemDetail> {
                           FloatingActionButton(
                               backgroundColor: Colors.brown,
                               child: Icon(
-                                Icons.add,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  count++;
-                                });
-                              }),
-                          Text("${count}"),
-                          FloatingActionButton(
-                              backgroundColor: Colors.brown,
-                              child: Icon(
                                 Icons.remove,
                                 color: Colors.white,
                               ),
@@ -170,6 +158,18 @@ class _ItemDetailState extends State<ItemDetail> {
                                 }
                                 setState(() {
                                   count--;
+                                });
+                              }),
+                          Text("${count}"),
+                          FloatingActionButton(
+                              backgroundColor: Colors.brown,
+                              child: Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  count++;
                                 });
                               }),
                         ],

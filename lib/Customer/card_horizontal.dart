@@ -33,8 +33,8 @@ class _CardHorizontalState extends State<CardHorizontal> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           child: InkWell(
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AddProducts())),
+            onTap: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => ItemDetail())),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +70,9 @@ class _CardHorizontalState extends State<CardHorizontal> {
                 ButtonBar(
                   children: [
                     Icon(
-                      Icons.shopping_basket_outlined,
+                      (click == false)
+                          ? Icons.shopping_basket_outlined
+                          : Icons.shopping_basket,
                       color: Colors.brown,
                     ),
                     FlatButton(

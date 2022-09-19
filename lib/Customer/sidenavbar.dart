@@ -42,7 +42,8 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.favorite),
             title: Text('My Wishlist'),
-            onTap: () => null,
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => WishListPage())),
           ),
           ListTile(
             leading: Icon(Icons.shopping_bag),
@@ -53,7 +54,8 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.shopping_cart),
             title: Text('My Cart'),
-            onTap: () => null,
+            onTap: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => CartPage())),
             trailing: ClipOval(
               child: Container(
                 color: Colors.red,
