@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:all_sweets/Customer/about_us.dart';
 import 'package:all_sweets/Customer/customer_main.dart';
 import 'package:all_sweets/Login&SignUp/login_main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     if (snapshot.hasData) {
                       return CustomerBottomNav();
                     } else {
-                      return Login();
+                      return AboutUs();
                     }
                   }),
                 ),
