@@ -13,7 +13,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.brown[200],
         title: Text('Profile Page'),
         leading: IconButton(
           icon: Icon(
@@ -24,8 +24,9 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.settings,
-            color: Colors.white,
+            icon: Icon(
+              Icons.settings,
+              color: Colors.white,
             ),
             onPressed: () {},
           ),
@@ -49,17 +50,16 @@ class _ProfilePageState extends State<ProfilePage> {
                         border: Border.all(width: 4, color: Colors.white),
                         boxShadow: [
                           BoxShadow(
-                            spreadRadius: 2,
-                            blurRadius: 10,
-                            color: Colors.black.withOpacity(0.1)
-                          ),
+                              spreadRadius: 2,
+                              blurRadius: 10,
+                              color: Colors.black.withOpacity(0.1)),
                         ],
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           fit: BoxFit.cover,
                           image: NetworkImage(
                             'https://pixabay.com/photos/people-cowboy-male-hat-person-875597/',
-                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -70,13 +70,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 40,
                         width: 40,
                         decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            width: 4,
-                            color: Colors.white
-                          ),
-                          color: Colors.deepPurple
-                        ),
+                            shape: BoxShape.circle,
+                            border: Border.all(width: 4, color: Colors.white),
+                            color: Colors.brown),
                         child: Icon(
                           Icons.edit,
                           color: Colors.white,
@@ -96,37 +92,39 @@ class _ProfilePageState extends State<ProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   OutlinedButton(
-                    onPressed: () {}, 
-                    child: Text("Cancel", style: TextStyle(
-                      fontSize: 15,
-                      //letterSpacing: 2,
-                      color: Colors.white
-                    ),
+                    onPressed: () {},
+                    child: Text(
+                      "Cancel",
+                      style: TextStyle(
+                          fontSize: 15,
+                          //letterSpacing: 2,
+                          color: Colors.white),
                     ),
                     style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 50),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                    backgroundColor: Colors.deepPurple
-                    ),
+                        padding: EdgeInsets.symmetric(horizontal: 50),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        backgroundColor: Colors.deepPurple),
                   ),
                   ElevatedButton(
                     onPressed: () {},
-                    child: Text("Save", style: TextStyle(
-                      fontSize: 15,
-                      //letterSpacing: 2,
-                      color: Colors.white
-                    ),
+                    child: Text(
+                      "Save",
+                      style: TextStyle(
+                          fontSize: 15,
+                          //letterSpacing: 2,
+                          color: Colors.white),
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
                       padding: EdgeInsets.symmetric(horizontal: 50),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
                       //backgroundColor:
                     ),
                   ),
                 ],
               ),
-
             ],
           ),
         ),
@@ -134,30 +132,29 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget buildTextField(String labelText, String placeholder, bool isPasswordTextField) {
+  Widget buildTextField(
+      String labelText, String placeholder, bool isPasswordTextField) {
     return Padding(
       padding: EdgeInsets.only(bottom: 30),
       child: TextField(
         obscureText: isPasswordTextField ? true : false,
         decoration: InputDecoration(
-          suffixIcon: isPasswordTextField ?
-              IconButton(
+          suffixIcon: isPasswordTextField
+              ? IconButton(
                   icon: Icon(Icons.remove_red_eye, color: Colors.grey),
                   onPressed: () {
                     setState(() {
                       isObscurePassword = !isObscurePassword;
                     });
                   },
-              ): null,
-        contentPadding: EdgeInsets.only(bottom: 5),
-        labelText: labelText,
+                )
+              : null,
+          contentPadding: EdgeInsets.only(bottom: 5),
+          labelText: labelText,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           hintText: placeholder,
           hintStyle: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Colors.grey
-          ),
+              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey),
         ),
       ),
     );

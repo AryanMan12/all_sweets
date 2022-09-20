@@ -29,10 +29,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  image_picker:
 
   # Firebase
   cloud_firestore: ^3.4.5
   firebase_auth: ^3.8.0
+  firebase_storage: ^10.3.8
 
   # Charts for data representation
   fl_chart: ^0.55.1

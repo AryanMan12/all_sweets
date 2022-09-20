@@ -1,13 +1,18 @@
 import 'dart:async';
+<<<<<<< HEAD
 
 import 'package:all_sweets/Customer/about_us.dart';
+=======
+>>>>>>> f336b12c85d154df562a8c315863ff77f2876aec
 import 'package:all_sweets/Customer/customer_main.dart';
 import 'package:all_sweets/Login&SignUp/login_main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
-import 'Login&SignUp/sign_up.dart';
+import 'Owner/owner_main.dart';
+import 'RegularWorkers/regular_main.dart';
+import 'TemporaryWorkers/temporary_main.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -17,9 +22,12 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  String type = "";
+
   @override
   void initState() {
     super.initState();
+<<<<<<< HEAD
     Timer(
         Duration(seconds: 5),
         () => Navigator.pushReplacement(
@@ -37,6 +45,44 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             ));
+=======
+    Timer(Duration(seconds: 5), () {
+      if (FirebaseAuth.instance.currentUser == null) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Login()));
+      } else {
+        String email = FirebaseAuth.instance.currentUser?.email as String;
+        fetchAllContact(email).then((type) {
+          if (type == "customer") {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => CustomerBottomNav()));
+          } else if (type == "owner") {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => OwnerBottomNav()));
+          } else if (type == "worker") {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => RegularWorker()));
+          } else if (type == "tempworker") {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => TempWorker()));
+          } else {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Login()));
+          }
+        });
+      }
+    });
+  }
+
+  Future<String> fetchAllContact(email) async {
+    String type = "";
+    Map<String, dynamic> doc;
+    DocumentSnapshot documentSnapshot =
+        await FirebaseFirestore.instance.collection("Users").doc(email).get();
+    doc = documentSnapshot.data() as Map<String, dynamic>;
+    type = doc.values.first;
+    return type;
+>>>>>>> f336b12c85d154df562a8c315863ff77f2876aec
   }
 
   @override

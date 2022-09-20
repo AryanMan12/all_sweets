@@ -1,3 +1,4 @@
+import 'package:all_sweets/Owner/Product_add.dart';
 import 'package:flutter/material.dart';
 
 import 'item_detail.dart';
@@ -17,6 +18,9 @@ class _CardHorizontalState extends State<CardHorizontal> {
   final String quantity = "500 grams";
 
   final String imgPath = "assets/images/product[0].jpg";
+
+  bool click = true;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,12 +70,23 @@ class _CardHorizontalState extends State<CardHorizontal> {
                 ButtonBar(
                   children: [
                     Icon(
-                      Icons.shopping_basket_outlined,
-                      color: Colors.deepPurple,
+                      (click == false)
+                          ? Icons.shopping_basket_outlined
+                          : Icons.shopping_basket,
+                      color: Colors.brown,
                     ),
-                    Icon(
-                      Icons.favorite_border_outlined,
-                      color: Colors.deepPurple,
+                    FlatButton(
+                      onPressed: () {
+                        setState(() {
+                          click = !click;
+                        });
+                      },
+                      child: Icon(
+                        (click == false)
+                            ? Icons.favorite_border_outlined
+                            : Icons.favorite,
+                        color: Colors.brown,
+                      ),
                     )
                   ],
                 )

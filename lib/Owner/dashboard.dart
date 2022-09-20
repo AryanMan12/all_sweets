@@ -76,10 +76,11 @@ class _DashboardState extends State<Dashboard> {
                         spots: totalPoints,
                         isCurved: true,
                         barWidth: 3,
-                        color: Colors.blue,
+                        color: Colors.brown,
                         belowBarData: BarAreaData(
                           show: true,
-                          color: Colors.lightBlue.withOpacity(0.5),
+                          color: Color.fromARGB(255, 153, 127, 117)
+                              .withOpacity(0.5),
                         ),
                         dotData: FlDotData(
                           show: false,
@@ -89,10 +90,11 @@ class _DashboardState extends State<Dashboard> {
                         spots: balancePoints,
                         isCurved: true,
                         barWidth: 3,
-                        color: Colors.green,
+                        color: Color.fromARGB(255, 20, 75, 22),
                         belowBarData: BarAreaData(
                           show: true,
-                          color: Colors.lightGreen.withOpacity(0.5),
+                          color: Color.fromARGB(255, 152, 196, 102)
+                              .withOpacity(0.5),
                         ),
                         dotData: FlDotData(
                           show: false,
@@ -106,10 +108,11 @@ class _DashboardState extends State<Dashboard> {
                           axisNameWidget: Row(
                             children: [
                               Text("------",
-                                  style: TextStyle(color: Colors.blue)),
+                                  style: TextStyle(color: Colors.brown)),
                               Text("Total        "),
                               Text("------",
-                                  style: TextStyle(color: Colors.green)),
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 20, 75, 22))),
                               Text("Balance"),
                             ],
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -175,14 +178,14 @@ class _DashboardState extends State<Dashboard> {
             Text(
               "Total Earned",
               style: TextStyle(
-                  color: Colors.blue,
+                  color: Colors.brown,
                   fontSize: 18,
                   fontWeight: FontWeight.w800),
             ),
             Text(
               "Total Balance",
               style: TextStyle(
-                  color: Colors.green,
+                  color: Color.fromARGB(255, 20, 75, 22),
                   fontSize: 18,
                   fontWeight: FontWeight.w800),
             ),
