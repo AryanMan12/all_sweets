@@ -52,7 +52,7 @@ class _AboutUsState extends State<AboutUs> {
               'Contact Us',
               style: TextStyle(color: Colors.white),
             ),
-            color: Colors.blue,
+            color: Colors.deepPurple,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
           ),

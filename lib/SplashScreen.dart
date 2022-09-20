@@ -1,9 +1,4 @@
 import 'dart:async';
-<<<<<<< HEAD
-
-import 'package:all_sweets/Customer/about_us.dart';
-=======
->>>>>>> f336b12c85d154df562a8c315863ff77f2876aec
 import 'package:all_sweets/Customer/customer_main.dart';
 import 'package:all_sweets/Login&SignUp/login_main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -27,25 +22,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-<<<<<<< HEAD
-    Timer(
-        Duration(seconds: 5),
-        () => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => StreamBuilder<User?>(
-                  stream: FirebaseAuth.instance.authStateChanges(),
-                  builder: ((context, snapshot) {
-                    if (snapshot.hasData) {
-                      return CustomerBottomNav();
-                    } else {
-                      return AboutUs();
-                    }
-                  }),
-                ),
-              ),
-            ));
-=======
     Timer(Duration(seconds: 5), () {
       if (FirebaseAuth.instance.currentUser == null) {
         Navigator.pushReplacement(
@@ -82,7 +58,6 @@ class _SplashScreenState extends State<SplashScreen> {
     doc = documentSnapshot.data() as Map<String, dynamic>;
     type = doc.values.first;
     return type;
->>>>>>> f336b12c85d154df562a8c315863ff77f2876aec
   }
 
   @override
