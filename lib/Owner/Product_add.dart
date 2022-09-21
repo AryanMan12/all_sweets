@@ -19,6 +19,14 @@ class _AddProductsState extends State<AddProducts> {
   late File imageFile;
   bool _load = true;
 
+  List<String> items = <String>[
+    'Sweets',
+    'Snacks',
+    'Others',
+  ];
+
+  String dropdownValue = 'Sweets';
+
   Future chooseImage(ImageSource source) async {
     final pickedFile = await picker.pickImage(source: source);
     Navigator.pop(context);
@@ -122,6 +130,45 @@ class _AddProductsState extends State<AddProducts> {
                           ),
                         ),
                       ),
+              ),
+              Container(
+                margin: new EdgeInsets.symmetric(horizontal: 70),
+                padding: const EdgeInsets.all(15.0),
+                height: 50,
+                width: 400,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.brown,
+                ),
+                child: DropdownButton(
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                    });
+                  },
+                  value: dropdownValue,
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.white,
+                  ),
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                  dropdownColor: Colors.brown[300],
+                  items: items.map<DropdownMenuItem<String>>(
+                    (String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    },
+                  ).toList(),
+                ),
+              ),
+              SizedBox(
+                height: 5,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
