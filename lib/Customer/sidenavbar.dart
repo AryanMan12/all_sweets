@@ -75,6 +75,11 @@ class NavBar extends StatelessWidget {
           ),
           Divider(),
           ListTile(
+            leading: Icon(Icons.info),
+            title: Text('About Us'),
+            onTap: () => null,
+          ),
+          ListTile(
             leading: Icon(Icons.help),
             title: Text('Help & Support'),
             onTap: () => null,
