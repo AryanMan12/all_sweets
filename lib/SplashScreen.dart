@@ -30,8 +30,12 @@ class _SplashScreenState extends State<SplashScreen> {
         String email = FirebaseAuth.instance.currentUser?.email as String;
         fetchAllContact(email).then((type) {
           if (type == "customer") {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => CustomerBottomNav()));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CustomerBottomNav(
+                          userId: email,
+                        )));
           } else if (type == "owner") {
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => OwnerBottomNav()));

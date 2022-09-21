@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 import 'package:all_sweets/Owner/product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -37,6 +36,7 @@ class _AddProductsState extends State<AddProducts> {
     setState(() {
       _load = false;
       if (pickedFile == null) {
+        imageFile = File(imgPath);
         return;
       } else {
         imageFile = File(pickedFile.path);

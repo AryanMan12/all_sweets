@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
+  String user = FirebaseAuth.instance.currentUser?.email as String;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -35,7 +36,7 @@ class NavBar extends StatelessWidget {
               onTap: () => Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => CustomerBottomNav()),
+                        builder: (context) => CustomerBottomNav(userId: user)),
                     (Route<dynamic> route) => false,
                   )),
           Divider(),

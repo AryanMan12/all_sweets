@@ -5,7 +5,8 @@ import 'package:all_sweets/Login&SignUp/sign_up.dart';
 import 'package:flutter/material.dart';
 
 class CustomerBottomNav extends StatefulWidget {
-  const CustomerBottomNav({Key? key}) : super(key: key);
+  const CustomerBottomNav({Key? key, required this.userId}) : super(key: key);
+  final String userId;
 
   @override
   State<CustomerBottomNav> createState() => _CustomerBottomNavState();
