@@ -179,8 +179,10 @@ class _LoginState extends State<Login> {
         doc = documentSnapshot.data() as Map<String, dynamic>;
         type = doc.values.first;
         if (type == "customer") {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: ((context) => CustomerBottomNav())));
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) => CustomerBottomNav(userId: _email))));
         } else if (type == "owner") {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: ((context) => OwnerBottomNav())));

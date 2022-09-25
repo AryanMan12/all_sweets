@@ -301,8 +301,12 @@ class _SignUpPageState extends State<SignUpPage> {
           .catchError((e) => log(e));
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: _email, password: _password)
-          .then((value) => Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: ((context) => CustomerBottomNav()))))
+          .then((value) => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) => CustomerBottomNav(
+                        userId: _email,
+                      )))))
           .onError((error, stackTrace) => ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(error.toString()))));
     }
