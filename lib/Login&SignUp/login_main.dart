@@ -202,7 +202,9 @@ class _LoginState extends State<Login> {
       var doc = await users.doc(docId).get();
       return doc.exists;
     } catch (e) {
-      throw e;
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Email or Password is Wrong")));
+      return false;
     }
   }
 }

@@ -1,7 +1,6 @@
 import 'package:all_sweets/Customer/other_items_page.dart';
 import 'package:all_sweets/Customer/snacks_page.dart';
 import 'package:all_sweets/Customer/sweets_page.dart';
-import 'package:all_sweets/Login&SignUp/sign_up.dart';
 import 'package:flutter/material.dart';
 
 class CustomerBottomNav extends StatefulWidget {

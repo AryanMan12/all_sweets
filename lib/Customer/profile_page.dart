@@ -20,7 +20,7 @@ class _ProfilePageState extends State<ProfilePage> {
             Icons.arrow_back,
             color: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
@@ -57,9 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(
-                            'https://pixabay.com/photos/people-cowboy-male-hat-person-875597/',
-                          ),
+                          image: AssetImage("assets/images/product[0].jpg"),
                         ),
                       ),
                     ),

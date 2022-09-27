@@ -1,12 +1,16 @@
+import 'package:all_sweets/Customer/about_us.dart';
 import 'package:all_sweets/Customer/cart.dart';
 import 'package:all_sweets/Customer/customer_main.dart';
 import 'package:all_sweets/Customer/orders.dart';
+import 'package:all_sweets/Customer/profile_page.dart';
 import 'package:all_sweets/Customer/wishlist.dart';
+import 'package:all_sweets/Login&SignUp/login_main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
   String user = FirebaseAuth.instance.currentUser?.email as String;
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -18,11 +22,15 @@ class NavBar extends StatelessWidget {
             accountEmail: Text('allsweet@gmail.com'),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
-                child: Image.asset(
-                  "assets/images/product[0].jpg",
-                  width: 90,
-                  height: 90,
-                  fit: BoxFit.cover,
+                child: InkWell(
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProfilePage())),
+                  child: Image.asset(
+                    "assets/images/product[0].jpg",
+                    width: 90,
+                    height: 90,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -57,28 +65,13 @@ class NavBar extends StatelessWidget {
             title: Text('My Cart'),
             onTap: () => Navigator.push(
                 context, MaterialPageRoute(builder: (context) => CartPage())),
-            trailing: ClipOval(
-              child: Container(
-                color: Colors.red,
-                width: 20,
-                height: 20,
-                child: Center(
-                  child: Text(
-                    '8',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ),
-            ),
           ),
           Divider(),
           ListTile(
             leading: Icon(Icons.info),
             title: Text('About Us'),
-            onTap: () => null,
+            onTap: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => AboutUs())),
           ),
           ListTile(
             leading: Icon(Icons.help),
@@ -88,7 +81,14 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.logout),
             title: Text('Logout'),
-            onTap: () => FirebaseAuth.instance.signOut(),
+            onTap: () => {
+              FirebaseAuth.instance.signOut(),
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => Login()),
+                (Route<dynamic> route) => false,
+              )
+            },
           ),
         ],
       ),
