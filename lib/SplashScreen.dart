@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
             context, MaterialPageRoute(builder: (context) => Login()));
       } else {
         String email = FirebaseAuth.instance.currentUser?.email as String;
-        fetchAllContact(email).then((type) {
+        fetchCustomerType(email).then((type) {
           if (type == "customer") {
             Navigator.pushReplacement(
                 context,
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  Future<String> fetchAllContact(email) async {
+  Future<String> fetchCustomerType(email) async {
     String type = "";
     Map<String, dynamic> doc;
     DocumentSnapshot documentSnapshot =

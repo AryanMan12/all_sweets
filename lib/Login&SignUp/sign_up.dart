@@ -295,7 +295,9 @@ class _SignUpPageState extends State<SignUpPage> {
             "email": _email,
             "name": _name,
             "phone": _phone,
-            "address": _address
+            "address": _address,
+            "cart": [],
+            "favourite": [],
           })
           .then((value) => log("User Created"))
           .catchError((e) => log(e));
