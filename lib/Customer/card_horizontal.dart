@@ -70,9 +70,7 @@ class _CardHorizontalState extends State<CardHorizontal> {
                 ButtonBar(
                   children: [
                     Icon(
-                      (click == false)
-                          ? Icons.shopping_basket_outlined
-                          : Icons.shopping_basket,
+                      Icons.shopping_basket,
                       color: Colors.brown,
                     ),
                     FlatButton(
@@ -83,8 +81,8 @@ class _CardHorizontalState extends State<CardHorizontal> {
                       },
                       child: Icon(
                         (click == false)
-                            ? Icons.favorite_border_outlined
-                            : Icons.favorite,
+                            ? Icons.favorite
+                            : Icons.favorite_border_outlined,
                         color: Colors.brown,
                       ),
                     )

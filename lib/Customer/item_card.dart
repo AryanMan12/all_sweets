@@ -53,8 +53,8 @@ class _ItemCardState extends State<ItemCard> {
                       },
                       child: Icon(
                         (click == false)
-                            ? Icons.favorite_border_outlined
-                            : Icons.favorite,
+                            ? Icons.favorite
+                            : Icons.favorite_border_outlined,
                         color: Colors.brown,
                       ),
                     )
