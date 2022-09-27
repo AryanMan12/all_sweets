@@ -68,6 +68,13 @@ class _WishListPageState extends State<WishListPage> {
                   .map((e) => e.data() as Map<String, dynamic>?)
                   .toList();
 
+              for (var i = documentData.length - 1; i >= 0; i--) {
+                if (!(userData["favourite"]
+                    .contains(documentData[i]["name"]))) {
+                  documentData.removeAt(i);
+                }
+              }
+
               return ListView(
                 children: <Widget>[
                   SizedBox(height: 2.0),
@@ -84,11 +91,8 @@ class _WishListPageState extends State<WishListPage> {
                           children: List<Widget>.generate(
                               documentData.length,
                               (index) => ItemCard(
-                                    itemData: (userData["favourite"].contains(
-                                            documentData[index]["name"]))
-                                        ? (documentData[index]
-                                            as Map<String, dynamic>)
-                                        : {},
+                                    itemData: (documentData[index]
+                                        as Map<String, dynamic>),
                                     userData: userData,
                                   )))),
                 ],
