@@ -21,7 +21,7 @@ class _OrdersPageState extends State<OrdersPage> {
           title: Text(
             "My Orders",
             style: TextStyle(
-                fontSize: 28, fontWeight: FontWeight.w500, color: Colors.black),
+                fontSize: 28, fontWeight: FontWeight.w500, color: Colors.white),
           ),
           elevation: 8,
         ),

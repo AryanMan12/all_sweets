@@ -4,6 +4,7 @@ import 'package:all_sweets/Customer/about_us.dart';
 import 'package:all_sweets/Customer/cart.dart';
 import 'package:all_sweets/Customer/customer_main.dart';
 import 'package:all_sweets/Customer/orders.dart';
+import 'package:all_sweets/Customer/Faq.dart';
 import 'package:all_sweets/Customer/profile_page.dart';
 import 'package:all_sweets/Customer/wishlist.dart';
 import 'package:all_sweets/Login&SignUp/login_main.dart';
@@ -100,9 +101,10 @@ class NavBar extends StatelessWidget {
                 context, MaterialPageRoute(builder: (context) => AboutUs())),
           ),
           ListTile(
-            leading: Icon(Icons.help),
-            title: Text('Help & Support'),
-            onTap: () => null,
+            leading: Icon(Icons.feedback),
+            title: Text('Feedback and Support'),
+            onTap: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Faq_page())),
           ),
           ListTile(
             leading: Icon(Icons.logout),
