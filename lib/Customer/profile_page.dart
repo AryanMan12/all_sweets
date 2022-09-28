@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -8,7 +12,32 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final addressController = TextEditingController();
+
   bool isObscurePassword = true;
+  Map<String, dynamic> userData = {};
+
+  String user = FirebaseAuth.instance.currentUser?.email as String;
+
+  CollectionReference customers =
+      FirebaseFirestore.instance.collection("Customer");
+
+  Future<Map<String, dynamic>> getData() async {
+    Map<String, dynamic> userData =
+        (await customers.doc(user).get()).data() as Map<String, dynamic>;
+    return userData;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,16 +98,52 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               SizedBox(height: 30),
-              buildTextField("Full Name", "Demon", false),
-              buildTextField("Email", "demon1@gmail.com", false),
-              buildTextField("Password", "*******", true),
-              buildTextField("Address", "Mumbai", false),
+              FutureBuilder(
+                  future: getData(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (!snapshot.hasData) {
+                      return Text("loading...");
+                    }
+                    return buildTextField("Full Name", snapshot.data['name'],
+                        false, nameController..text = snapshot.data['name']);
+                  }),
+              FutureBuilder(
+                  future: getData(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (!snapshot.hasData) {
+                      return Text("loading...");
+                    }
+                    return buildTextField("Email", snapshot.data['email'],
+                        false, emailController..text = snapshot.data['email']);
+                  }),
+              FutureBuilder(
+                  future: getData(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (!snapshot.hasData) {
+                      return Text("loading...");
+                    }
+                    return buildTextField("Phone", snapshot.data['phone'],
+                        false, phoneController..text = snapshot.data['phone']);
+                  }),
+              FutureBuilder(
+                  future: getData(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (!snapshot.hasData) {
+                      return Text("loading...");
+                    }
+
+                    return buildTextField(
+                        "Address",
+                        snapshot.data['address'],
+                        false,
+                        addressController..text = snapshot.data['address']);
+                  }),
               SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () => Navigator.pop(context),
                     child: Text(
                       "Cancel",
                       style: TextStyle(
@@ -93,7 +158,29 @@ class _ProfilePageState extends State<ProfilePage> {
                         backgroundColor: Colors.brown),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      String _name = nameController.text.trim();
+                      String _phone = phoneController.text.trim();
+                      String _address = addressController.text.trim();
+                      String _email = addressController.text.trim();
+
+                      if (_name.isEmpty ||
+                          _phone.isEmpty ||
+                          _address.isEmpty ||
+                          _email.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("Text Fields Cannot be Empty")));
+                      } else if (_phone.length != 10) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("Enter a Valid Phone Number")));
+                      } else {
+                        customers.doc(user).update({
+                          "name": _name,
+                          "phone": _phone,
+                          "address": _address,
+                        });
+                      }
+                    },
                     child: Text(
                       "Save",
                       style: TextStyle(
@@ -118,12 +205,13 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget buildTextField(
-      String labelText, String placeholder, bool isPasswordTextField) {
+  Widget buildTextField(String labelText, String placeholder,
+      bool isPasswordTextField, TextEditingController controller) {
     return Padding(
       padding: EdgeInsets.only(bottom: 30),
       child: TextField(
         obscureText: isPasswordTextField ? true : false,
+        controller: controller,
         decoration: InputDecoration(
           suffixIcon: isPasswordTextField
               ? IconButton(

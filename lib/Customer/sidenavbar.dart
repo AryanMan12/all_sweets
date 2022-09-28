@@ -25,7 +25,6 @@ class NavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getData();
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,

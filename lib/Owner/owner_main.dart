@@ -1,9 +1,13 @@
+import 'dart:ui';
+
 import 'package:all_sweets/Owner/Product_add.dart';
 import 'package:all_sweets/Owner/daily_khata.dart';
 import 'package:all_sweets/Owner/dashboard.dart';
 import 'package:all_sweets/Owner/order_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../Login&SignUp/login_main.dart';
 
 class OwnerBottomNav extends StatefulWidget {
   const OwnerBottomNav({Key? key}) : super(key: key);
@@ -21,7 +25,9 @@ class _OwnerBottomNavState extends State<OwnerBottomNav> {
     Scaffold(
       appBar: AppBar(title: Text("Hello")),
       body: InkWell(
-        onTap: () => FirebaseAuth.instance.signOut(),
+        onTap: () {
+          FirebaseAuth.instance.signOut();
+        },
         child: Text("SignOut"),
       ),
     ),
