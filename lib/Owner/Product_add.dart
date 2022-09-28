@@ -316,7 +316,8 @@ class _AddProductsState extends State<AddProducts> {
           "price": price,
           "quantity": quant,
           "image_url": imgUrl,
-          "type": dropdownValue
+          "type": dropdownValue,
+          "availibility": "0",
         })
         .then((value) => ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text("Product Added"))))
