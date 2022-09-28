@@ -16,7 +16,8 @@ class _OrderListState extends State<OrderList> {
         title: Text(
           'Orders',
         ),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.brown[400],
+        foregroundColor: Colors.black,
       ),
       body: _buildListView(context),
     );
@@ -29,19 +30,17 @@ ListView _buildListView(BuildContext context) {
     itemBuilder: (_, index) {
       return Card(
         child: ListTile(
-        title: Text('Order No. $index'),
-        subtitle: Text('Info'),
-        leading: Icon(Icons.list),
-        trailing: IconButton(
-          icon: Icon(Icons.arrow_forward),
-          onPressed: () {
-            Navigator.push(
-              context, 
-              MaterialPageRoute(
-                builder: (context) => BillDetails(index)
-              ),
-            );
-          }),
+          title: Text('Order No. $index'),
+          subtitle: Text('Info'),
+          leading: Icon(Icons.list),
+          trailing: IconButton(
+              icon: Icon(Icons.arrow_forward),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BillDetails(index)),
+                );
+              }),
         ),
       );
     },

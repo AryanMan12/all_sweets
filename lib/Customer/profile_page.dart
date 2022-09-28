@@ -13,24 +13,12 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.brown[200],
-        title: Text('Profile Page'),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-          onPressed: () => Navigator.pop(context),
+        backgroundColor: Colors.brown[400],
+        title: Text(
+          'Profile Page',
+          style: TextStyle(
+              fontSize: 28, fontWeight: FontWeight.w500, color: Colors.white),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: Container(
         padding: EdgeInsets.only(left: 15, top: 20, right: 15),
@@ -102,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         padding: EdgeInsets.symmetric(horizontal: 50),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
-                        backgroundColor: Colors.deepPurple),
+                        backgroundColor: Colors.brown),
                   ),
                   ElevatedButton(
                     onPressed: () {},
@@ -114,7 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: Colors.white),
                     ),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.blue,
+                      primary: Colors.brown,
                       padding: EdgeInsets.symmetric(horizontal: 50),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
