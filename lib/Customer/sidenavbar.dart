@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:all_sweets/Customer/about_us.dart';
 import 'package:all_sweets/Customer/cart.dart';
 import 'package:all_sweets/Customer/customer_main.dart';
@@ -5,21 +7,45 @@ import 'package:all_sweets/Customer/orders.dart';
 import 'package:all_sweets/Customer/profile_page.dart';
 import 'package:all_sweets/Customer/wishlist.dart';
 import 'package:all_sweets/Login&SignUp/login_main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
   String user = FirebaseAuth.instance.currentUser?.email as String;
+  CollectionReference customers =
+      FirebaseFirestore.instance.collection("Customer");
+
+  Future<Map<String, dynamic>> getData() async {
+    Map<String, dynamic> userData =
+        (await customers.doc(user).get()).data() as Map<String, dynamic>;
+    return userData;
+  }
 
   @override
   Widget build(BuildContext context) {
+    getData();
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text('All Sweets'),
-            accountEmail: Text('allsweet@gmail.com'),
+            accountName: FutureBuilder(
+                future: getData(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (!snapshot.hasData) {
+                    return Text("loading...");
+                  }
+                  return Text(snapshot.data["name"]);
+                }),
+            accountEmail: FutureBuilder(
+                future: getData(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (!snapshot.hasData) {
+                    return Text("loading...");
+                  }
+                  return Text(snapshot.data["email"]);
+                }),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: InkWell(

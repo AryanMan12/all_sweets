@@ -1,28 +1,57 @@
+import 'dart:developer';
+
 import 'package:all_sweets/Customer/item_detail.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ItemCard extends StatefulWidget {
-  const ItemCard({Key? key}) : super(key: key);
+  const ItemCard({Key? key, required this.itemData, required this.userData})
+      : super(key: key);
+  final Map<String, dynamic> itemData;
+  final Map<String, dynamic> userData;
 
   @override
   State<ItemCard> createState() => _ItemCardState();
 }
 
 class _ItemCardState extends State<ItemCard> {
-  final String name = "Gulab Jamun";
+  String name = "";
+  String price = "";
+  String imgPath = "";
+  bool added = false;
+  bool isFavourite = false;
 
-  final String price = "Rs.500";
+  String user = FirebaseAuth.instance.currentUser?.email as String;
 
-  final String imgPath = "assets/images/product[0].jpg";
+  CollectionReference customers =
+      FirebaseFirestore.instance.collection("Customer");
 
-  final bool added = false;
+  Future<Map<String, dynamic>> getData() async {
+    Map<String, dynamic> userData =
+        (await customers.doc(user).get()).data() as Map<String, dynamic>;
+    return userData;
+  }
 
-  final bool isFavourite = false;
-
-  bool click = true;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (widget.itemData.isNotEmpty) {
+      name = widget.itemData["name"];
+      price = widget.itemData["price"];
+      imgPath = widget.itemData["image_url"];
+      added = (widget.userData["cart"]).contains(widget.itemData["name"]);
+      isFavourite =
+          (widget.userData["favourite"]).contains(widget.itemData["name"]);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.itemData.isEmpty) {
+      return SizedBox();
+    }
     return Padding(
       padding: EdgeInsets.only(top: 15.0, bottom: 5.0, left: 5.0, right: 5.0),
       child: InkWell(
@@ -48,11 +77,19 @@ class _ItemCardState extends State<ItemCard> {
                     FlatButton(
                       onPressed: () {
                         setState(() {
-                          click = !click;
+                          isFavourite = !isFavourite;
+                          List favList = widget.userData["favourite"];
+                          if (isFavourite) {
+                            favList.add(name);
+                            customers.doc(user).update({"favourite": favList});
+                          } else {
+                            favList.remove(name);
+                            customers.doc(user).update({"favourite": favList});
+                          }
                         });
                       },
                       child: Icon(
-                        (click == false)
+                        (isFavourite == true)
                             ? Icons.favorite
                             : Icons.favorite_border_outlined,
                         color: Colors.brown,
@@ -60,13 +97,13 @@ class _ItemCardState extends State<ItemCard> {
                     )
                   ])),
               Hero(
-                  tag: Null,
+                  tag: name,
                   child: Container(
                       height: 75.0,
                       width: 75.0,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage(imgPath),
+                              image: NetworkImage(imgPath),
                               fit: BoxFit.contain)))),
               SizedBox(height: 7.0),
               Text(price,
@@ -84,28 +121,43 @@ class _ItemCardState extends State<ItemCard> {
                   child: Container(color: Colors.black, height: 1.0)),
               Padding(
                 padding: EdgeInsets.only(left: 5.0, right: 5.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      if (!added) ...[
-                        Icon(Icons.shopping_basket,
-                            color: Colors.brown[400], size: 12.0),
-                        Text('Add to cart',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'Varela',
-                                fontSize: 12.0)),
-                      ],
-                      if (added) ...[
-                        Icon(Icons.remove_circle_outline,
-                            color: Colors.brown[400], size: 12.0),
-                        Text('Remove from cart',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'Varela',
-                                fontSize: 12.0)),
-                      ],
-                    ]),
+                child: InkWell(
+                  onTap: (() {
+                    setState(() {
+                      added = !added;
+                      List cart = widget.userData["cart"];
+                      if (added) {
+                        cart.add(name);
+                        customers.doc(user).update({"cart": cart});
+                      } else {
+                        cart.remove(name);
+                        customers.doc(user).update({"cart": cart});
+                      }
+                    });
+                  }),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        if (!added) ...[
+                          Icon(Icons.shopping_basket,
+                              color: Colors.brown[400], size: 12.0),
+                          Text('Add to cart',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Varela',
+                                  fontSize: 12.0)),
+                        ],
+                        if (added) ...[
+                          Icon(Icons.remove_circle_outline,
+                              color: Colors.brown[400], size: 12.0),
+                          Text('Remove from cart',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Varela',
+                                  fontSize: 12.0)),
+                        ],
+                      ]),
+                ),
               ),
             ],
           ),
