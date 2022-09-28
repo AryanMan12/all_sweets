@@ -9,23 +9,23 @@ class BillDetails extends StatefulWidget {
 }
 
 class _BillDetailsState extends State<BillDetails> {
-  
   //final int index;
-  
+
   //BillDetails(this.index);
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.brown[400],
+        foregroundColor: Colors.black,
         title: Text('Bill'),
       ),
       body: Center(
-        //child: Text(
-          //'the details page #$index', 
+          //child: Text(
+          //'the details page #$index',
           //style: TextStyle(fontSize: 32.0),
-        ),
+          ),
     );
   }
 }

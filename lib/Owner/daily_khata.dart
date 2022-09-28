@@ -13,7 +13,7 @@ class _DailyKhataState extends State<DailyKhata> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.brown[400],
         foregroundColor: Colors.black,
         title: Text(
           "Khata",

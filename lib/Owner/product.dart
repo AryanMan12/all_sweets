@@ -22,7 +22,8 @@ class _ProductsState extends State<Products> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Products"),
-        backgroundColor: Colors.brown,
+        backgroundColor: Colors.brown[400],
+        foregroundColor: Colors.black,
       ),
       body: Padding(
           padding: const EdgeInsets.all(7.0),

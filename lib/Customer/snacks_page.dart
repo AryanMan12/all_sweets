@@ -46,12 +46,12 @@ class _SnacksPageState extends State<SnacksPage> {
         backgroundColor: Colors.white,
         drawer: NavBar(),
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.brown[400],
           foregroundColor: Colors.black,
           title: Text(
             "Snacks",
             style: TextStyle(
-                fontSize: 28, fontWeight: FontWeight.w500, color: Colors.black),
+                fontSize: 28, fontWeight: FontWeight.w500, color: Colors.white),
           ),
           elevation: 0,
         ),
