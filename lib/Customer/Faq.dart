@@ -90,7 +90,7 @@ class _Faq_pageState extends State<Faq_page> {
           children: <Widget>[
             SizedBox(height: 10.0),
             Text(
-              "Please Select the type of Feedback for helping us improve",
+              "What is your issue? Would you like to give us a feedback?",
               style: TextStyle(color: Colors.black),
             ),
             SizedBox(height: 25.0),
