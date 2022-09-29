@@ -4,6 +4,7 @@ import 'package:all_sweets/Owner/product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Faq_page extends StatefulWidget {
@@ -14,65 +15,7 @@ class Faq_page extends StatefulWidget {
 }
 
 class _Faq_pageState extends State<Faq_page> {
-  String imgPath = "assets/images/product[0].jpg";
-  final picker = ImagePicker();
-  PickedFile? pickedImage;
-  late File imageFile;
-  bool _load = true;
-  CollectionReference image = FirebaseFirestore.instance.collection("Image");
-
-  _Faq_pageState() {
-    imageFile = File(imgPath);
-  }
-
-  final nameController = TextEditingController();
-  final priceController = TextEditingController();
-  final quantController = TextEditingController();
-  final detailsController = TextEditingController();
-
-  Future chooseImage(ImageSource source) async {
-    final pickedFile = await picker.pickImage(source: source);
-    Navigator.pop(context);
-    setState(() {
-      _load = false;
-      if (pickedFile == null) {
-        imageFile = File(imgPath);
-        return;
-      } else {
-        imageFile = File(pickedFile.path);
-      }
-    });
-  }
-
-  Future<void> _showChoiceDialog(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Choose an option"),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  GestureDetector(
-                    child: Text("Gallery"),
-                    onTap: () {
-                      chooseImage(ImageSource.gallery);
-                    },
-                  ),
-                  Padding(padding: EdgeInsets.all(8)),
-                  GestureDetector(
-                    child: Text("Camera"),
-                    onTap: () {
-                      chooseImage(ImageSource.camera);
-                    },
-                  )
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
+  double rating = 0;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -181,7 +124,7 @@ class _Faq_pageState extends State<Faq_page> {
       child: Stack(
         children: <Widget>[
           TextField(
-            maxLines: 10,
+            maxLines: 30,
             decoration: InputDecoration(
               hintText:
                   "Please leave your feedback and issues here, so we can help you out. ",
@@ -197,43 +140,29 @@ class _Faq_pageState extends State<Faq_page> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    width: 1.0,
-                    color: Colors.brown,
-                  ),
-                ),
-              ),
-              padding: EdgeInsets.all(8),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.brown[100],
-                        borderRadius: BorderRadius.circular(5.0)),
-                    child: Padding(
-                      padding: EdgeInsets.all(8),
-                      child: IconButton(
-                          onPressed: () {
-                            _showChoiceDialog(context);
-                          },
-                          icon: const Icon(Icons.add),
-                          color: Colors.black),
-                    ),
-                  ),
-                  SizedBox(width: 20.0),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   Text(
-                    "Upload a screenshot (optional)",
-                    style: TextStyle(
-                      color: Colors.brown,
-                    ),
-                  )
+                    'Rating:$rating',
+                    style: TextStyle(fontSize: 22, color: Colors.brown),
+                  ),
+                  const SizedBox(height: 25),
+                  RatingBar.builder(
+                    minRating: 1,
+                    itemBuilder: (context, _) =>
+                        Icon(Icons.star, color: Colors.brown),
+                    updateOnDrag: true,
+                    allowHalfRating: false,
+                    onRatingUpdate: (rating) => setState(() {
+                      this.rating = rating;
+                    }),
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
