@@ -19,6 +19,8 @@ class _ItemCardState extends State<ItemCard> {
   String name = "";
   String price = "";
   String imgPath = "";
+  String quantity = "";
+
   bool added = false;
   bool isFavourite = false;
 
@@ -41,6 +43,7 @@ class _ItemCardState extends State<ItemCard> {
       name = widget.itemData["name"];
       price = widget.itemData["price"];
       imgPath = widget.itemData["image_url"];
+      quantity = widget.itemData["quantity"];
       added = (widget.userData["cart"]).contains(widget.itemData["name"]);
       isFavourite =
           (widget.userData["favourite"]).contains(widget.itemData["name"]);
@@ -49,14 +52,16 @@ class _ItemCardState extends State<ItemCard> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.itemData.isEmpty) {
-      return SizedBox();
-    }
     return Padding(
       padding: EdgeInsets.only(top: 15.0, bottom: 5.0, left: 5.0, right: 5.0),
       child: InkWell(
         onTap: () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ItemDetail())),
+            context,
+            MaterialPageRoute(
+                builder: (context) => ItemDetail(
+                      itemData: widget.itemData,
+                      userData: widget.userData,
+                    ))),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.0),
@@ -106,12 +111,12 @@ class _ItemCardState extends State<ItemCard> {
                               image: NetworkImage(imgPath),
                               fit: BoxFit.contain)))),
               SizedBox(height: 7.0),
-              Text(price,
+              Text(name,
                   style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'Varela',
                       fontSize: 14.0)),
-              Text(name,
+              Text("₹ $price /- ($quantity)",
                   style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'Varela',

@@ -275,7 +275,7 @@ class _SignUpPageState extends State<SignUpPage> {
         _cpassword.isEmpty) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Text Fields Cannot be Empty")));
-    } else if (_phone.length < 0 || _phone.length > 10) {
+    } else if (_phone.length != 10) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Enter a Valid Phone Number")));
     } else if (_password != _cpassword) {
