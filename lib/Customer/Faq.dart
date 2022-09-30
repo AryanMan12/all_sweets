@@ -28,8 +28,7 @@ class _Faq_pageState extends State<Faq_page> {
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: <Widget>[
             SizedBox(height: 10.0),
             Text(
@@ -45,7 +44,32 @@ class _Faq_pageState extends State<Faq_page> {
             SizedBox(height: 20.0),
             buildFeedbackForm(),
             SizedBox(height: 20.0),
-            buildNumberField(),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Rating:$rating',
+                      style: TextStyle(fontSize: 22, color: Colors.brown),
+                    ),
+                    const SizedBox(height: 25),
+                    RatingBar.builder(
+                      minRating: 1,
+                      itemBuilder: (context, _) =>
+                          Icon(Icons.star, color: Colors.brown),
+                      updateOnDrag: true,
+                      allowHalfRating: false,
+                      onRatingUpdate: (rating) => setState(() {
+                        this.rating = rating;
+                      }),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 20.0),
             Spacer(),
             Row(
               children: <Widget>[
@@ -70,61 +94,13 @@ class _Faq_pageState extends State<Faq_page> {
     );
   }
 
-  buildNumberField() {
-    return TextField(
-      style: TextStyle(
-        color: Colors.black,
-      ),
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(0.0),
-        prefixIcon: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  right: BorderSide(width: 1.0, color: Colors.brown),
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  SizedBox(width: 10.0),
-                  Text(
-                    "+91",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.brown,
-                    ),
-                  ),
-                  Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.brown[200],
-                  ),
-                  SizedBox(width: 10.0),
-                ],
-              ),
-            ),
-            SizedBox(width: 10.0),
-          ],
-        ),
-        hintStyle: TextStyle(
-          fontSize: 14.0,
-          color: Colors.brown,
-        ),
-        hintText: "Phone Number",
-        border: OutlineInputBorder(),
-      ),
-    );
-  }
-
   buildFeedbackForm() {
     return Container(
-      height: 200.0,
+      height: 150.0,
       child: Stack(
         children: <Widget>[
           TextField(
-            maxLines: 30,
+            maxLines: 20,
             decoration: InputDecoration(
               hintText:
                   "Please leave your feedback and issues here, so we can help you out. ",
@@ -135,31 +111,6 @@ class _Faq_pageState extends State<Faq_page> {
               border: OutlineInputBorder(
                 borderSide:
                     BorderSide(color: Color.fromARGB(255, 203, 184, 176)),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Rating:$rating',
-                    style: TextStyle(fontSize: 22, color: Colors.brown),
-                  ),
-                  const SizedBox(height: 25),
-                  RatingBar.builder(
-                    minRating: 1,
-                    itemBuilder: (context, _) =>
-                        Icon(Icons.star, color: Colors.brown),
-                    updateOnDrag: true,
-                    allowHalfRating: false,
-                    onRatingUpdate: (rating) => setState(() {
-                      this.rating = rating;
-                    }),
-                  ),
-                ],
               ),
             ),
           ),

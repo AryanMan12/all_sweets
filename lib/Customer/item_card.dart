@@ -52,6 +52,9 @@ class _ItemCardState extends State<ItemCard> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.itemData.isEmpty) {
+      return Container();
+    }
     return Padding(
       padding: EdgeInsets.only(top: 15.0, bottom: 5.0, left: 5.0, right: 5.0),
       child: InkWell(

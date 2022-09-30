@@ -55,6 +55,9 @@ class _CardHorizontalState extends State<CardHorizontal> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.itemData.isEmpty) {
+      return Container();
+    }
     return Container(
       color: Colors.white,
       child: Padding(
