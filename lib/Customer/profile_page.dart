@@ -1,8 +1,10 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -12,6 +14,58 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  String imgPath = "assets/images/product[0].jpg";
+  final picker = ImagePicker();
+  PickedFile? pickedImage;
+  late File imageFile;
+  bool _load = true;
+  _AddProductsState() {
+    imageFile = File(imgPath);
+  }
+
+  Future chooseImage(ImageSource source) async {
+    final pickedFile = await picker.pickImage(source: source);
+    Navigator.pop(context);
+    setState(() {
+      _load = false;
+      if (pickedFile == null) {
+        imageFile = File(imgPath);
+        return;
+      } else {
+        imageFile = File(pickedFile.path);
+      }
+    });
+  }
+
+  Future<void> _showChoiceDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Choose an option"),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  GestureDetector(
+                    child: Text("Gallery"),
+                    onTap: () {
+                      chooseImage(ImageSource.gallery);
+                    },
+                  ),
+                  Padding(padding: EdgeInsets.all(8)),
+                  GestureDetector(
+                    child: Text("Camera"),
+                    onTap: () {
+                      chooseImage(ImageSource.camera);
+                    },
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
@@ -61,39 +115,33 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Stack(
                   children: [
                     Container(
-                      width: 130,
-                      height: 130,
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 4, color: Colors.white),
-                        boxShadow: [
-                          BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1)),
-                        ],
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage("assets/images/product[0].jpg"),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        height: 40,
-                        width: 40,
+                        width: 130,
+                        height: 130,
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(width: 4, color: Colors.white),
-                            color: Colors.brown),
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.white,
+                          border: Border.all(width: 4, color: Colors.white),
+                          boxShadow: [
+                            BoxShadow(
+                                spreadRadius: 2,
+                                blurRadius: 10,
+                                color: Colors.black.withOpacity(0.1)),
+                          ],
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage(imgPath),
+                          ),
                         ),
-                      ),
-                    ),
+                        child: Row(
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  _showChoiceDialog(context);
+                                },
+                                padding: EdgeInsets.only(left: 82, top: 80),
+                                icon: const Icon(Icons.edit),
+                                color: Colors.white),
+                          ],
+                        )),
                   ],
                 ),
               ),

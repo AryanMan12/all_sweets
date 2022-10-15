@@ -1,52 +1,27 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ItemDetail extends StatefulWidget {
-  const ItemDetail({Key? key, required this.itemData, required this.userData})
+  const ItemDetail(
+      {Key? key,
+      required Map<String, dynamic> itemData,
+      required Map<String, dynamic> userData})
       : super(key: key);
-
-  final Map<String, dynamic> itemData;
-  final Map<String, dynamic> userData;
 
   @override
   State<ItemDetail> createState() => _ItemDetailState();
 }
 
 class _ItemDetailState extends State<ItemDetail> {
-  String name = "";
-  String price = "";
-  String details = "";
-  String imgPath = "";
-  bool isFavourite = false;
-  bool added = false;
+  final String name = "Gulab jamun ";
+
+  final String price = "Rs.500";
+
+  final String details =
+      "Gulab jamun is a sweet confectionary or dessert, originating in the Indian subcontinent";
+
+  bool click = true;
+
   int count = 0;
-
-  String user = FirebaseAuth.instance.currentUser?.email as String;
-
-  CollectionReference customers =
-      FirebaseFirestore.instance.collection("Customer");
-
-  Future<Map<String, dynamic>> getData() async {
-    Map<String, dynamic> userData =
-        (await customers.doc(user).get()).data() as Map<String, dynamic>;
-    return userData;
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    if (widget.itemData.isNotEmpty) {
-      name = widget.itemData["name"];
-      price = widget.itemData["price"];
-      details = widget.itemData["details"];
-      imgPath = widget.itemData["image_url"];
-      added = (widget.userData["cart"]).contains(widget.itemData["name"]);
-      isFavourite =
-          (widget.userData["favourite"]).contains(widget.itemData["name"]);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +33,8 @@ class _ItemDetailState extends State<ItemDetail> {
           height: MediaQuery.of(context).size.height * .5,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: NetworkImage(imgPath), fit: BoxFit.cover),
+                image: AssetImage('assets/images/product[0].jpg'),
+                fit: BoxFit.cover),
           ),
         ),
         Positioned(
@@ -120,23 +96,11 @@ class _ItemDetailState extends State<ItemDetail> {
                           InkWell(
                             onTap: () {
                               setState(() {
-                                isFavourite = !isFavourite;
-                                List favList = widget.userData["favourite"];
-                                if (isFavourite) {
-                                  favList.add(name);
-                                  customers
-                                      .doc(user)
-                                      .update({"favourite": favList});
-                                } else {
-                                  favList.remove(name);
-                                  customers
-                                      .doc(user)
-                                      .update({"favourite": favList});
-                                }
+                                click = !click;
                               });
                             },
                             child: Icon(
-                              (isFavourite == true)
+                              (click == false)
                                   ? Icons.favorite
                                   : Icons.favorite_border_outlined,
                               color: Colors.brown,
@@ -151,7 +115,7 @@ class _ItemDetailState extends State<ItemDetail> {
                       child: Row(
                         children: [
                           Text(
-                            "Price: ₹ $price /-",
+                            price,
                             style: TextStyle(
                                 fontSize: 18,
                                 fontFamily: 'Varela',
@@ -223,19 +187,7 @@ class _ItemDetailState extends State<ItemDetail> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             InkWell(
-                              onTap: (() {
-                                setState(() {
-                                  added = !added;
-                                  List cart = widget.userData["cart"];
-                                  if (added) {
-                                    cart.add(name);
-                                    customers.doc(user).update({"cart": cart});
-                                  } else {
-                                    cart.remove(name);
-                                    customers.doc(user).update({"cart": cart});
-                                  }
-                                });
-                              }),
+                              onTap: () {},
                               child: Container(
                                   height: 45,
                                   width: 129,
@@ -243,31 +195,14 @@ class _ItemDetailState extends State<ItemDetail> {
                                       color: Colors.brown,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Center(
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          if (!added) ...[
-                                            Icon(Icons.shopping_basket,
-                                                color: Colors.white,
-                                                size: 12.0),
-                                            Text('Add to cart',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: 'Varela',
-                                                    fontSize: 12.0)),
-                                          ],
-                                          if (added) ...[
-                                            Icon(Icons.remove_circle_outline,
-                                                color: Colors.white,
-                                                size: 12.0),
-                                            Text('Remove from cart',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: 'Varela',
-                                                    fontSize: 12.0)),
-                                          ],
-                                        ]),
+                                    child: Text(
+                                      'Add to Cart',
+                                      style: TextStyle(
+                                          fontSize: 22,
+                                          fontFamily: 'Varela',
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
                                   )),
                             ),
                             Container(
@@ -283,7 +218,7 @@ class _ItemDetailState extends State<ItemDetail> {
                                         fontSize: 22,
                                         fontFamily: 'Varela',
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white),
+                                        color: Colors.black),
                                   ),
                                 ))
                           ],
