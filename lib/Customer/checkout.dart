@@ -1,3 +1,7 @@
+/**import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+
 /**import 'package:all_sweets/Customer/card_horizontal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -166,5 +170,194 @@ class _CheckoutState extends State<Checkout> {
     );
   }
 
+}
+**/
+
+class MyWidget extends StatefulWidget {
+  const MyWidget({Key? key}) : super(key: key);
+
+  @override
+  State<MyWidget> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  final String name = "Gulab Jamun";
+  final String price = "Rs.500";
+  final String quantity = "500 grams";
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.brown[400],
+        title: Text(
+          'Order Summary',
+          style: TextStyle(
+              fontSize: 28, fontWeight: FontWeight.w500, color: Colors.white),
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 10.0),
+            Text(
+              "What is your issue? Would you like to give us a feedback?",
+              style: TextStyle(color: Colors.black),
+            ),
+            SizedBox(height: 20.0),
+            buildFeedbackForm(),
+            SizedBox(height: 20.0),
+            buildNumberField(),
+            Spacer(),
+            Row(
+              children: <Widget>[
+                Expanded(
+                    child: FlatButton(
+                  onPressed: () {},
+                  color: Colors.brown,
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    "Checkout",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ))
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  buildNumberField() {
+    return TextField(
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.all(0.0),
+        prefixIcon: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  right: BorderSide(width: 1.0, color: Colors.brown),
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  SizedBox(width: 10.0),
+                  Text(
+                    "+91",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.brown,
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.brown[200],
+                  ),
+                  SizedBox(width: 10.0),
+                ],
+              ),
+            ),
+            SizedBox(width: 10.0),
+          ],
+        ),
+        hintStyle: TextStyle(
+          fontSize: 14.0,
+          color: Colors.brown,
+        ),
+        hintText: "Phone Number",
+        border: OutlineInputBorder(),
+      ),
+    );
+  }
+
+  buildFeedbackForm() {
+    return Container(
+      height: 200.0,
+      child: Stack(
+        children: <Widget>[
+          TextField(
+            maxLines: 10,
+            decoration: InputDecoration(
+              hintText: "Add your address over here",
+              hintStyle: TextStyle(
+                fontSize: 13.0,
+                color: Colors.brown,
+              ),
+              border: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: Color.fromARGB(255, 203, 184, 176)),
+              ),
+            ),
+          ),
+          /**Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    width: 1.0,
+                    color: Colors.brown,
+                  ),
+                ),
+              ),
+              padding: EdgeInsets.all(8),
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.brown[100],
+                        borderRadius: BorderRadius.circular(5.0)),
+                    child: Padding(
+                      padding: EdgeInsets.all(8),
+                      child: IconButton(
+                          onPressed: () {
+                            _showChoiceDialog(context);
+                          },
+                          icon: const Icon(Icons.add),
+                          color: Colors.black),
+                    ),
+                  ),
+                  SizedBox(width: 20.0),
+                  Text(
+                    "Upload a screenshot (optional)",
+                    style: TextStyle(
+                      color: Colors.brown,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )**/
+        ],
+      ),
+    );
+  }
+
+  buildCheckItem(title) {
+    return Padding(
+        padding: EdgeInsets.only(bottom: 15.0),
+        child: Row(
+          children: <Widget>[
+            Icon(Icons.check_circle, color: Colors.brown),
+            SizedBox(width: 10),
+            Text(title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.brown,
+                ))
+          ],
+        ));
+  }
 }
 **/
