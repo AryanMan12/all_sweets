@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:all_sweets/Customer/card_horizontal.dart';
 import 'package:all_sweets/Customer/sidenavbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -82,13 +84,14 @@ class _CartPageState extends State<CartPage> {
                           crossAxisSpacing: 10.0,
                           mainAxisSpacing: 15.0,
                           childAspectRatio: 1.2,
-                          children: List<Widget>.generate(
-                              documentData.length,
-                              (index) => CardHorizontal(
-                                    itemData: (documentData[index]
-                                        as Map<String, dynamic>),
-                                    userData: userData,
-                                  )))),
+                          children: List<Widget>.generate(documentData.length,
+                              (index) {
+                            return CardHorizontal(
+                              itemData:
+                                  (documentData[index] as Map<String, dynamic>),
+                              userData: userData,
+                            );
+                          }))),
                 ],
               );
             }));
