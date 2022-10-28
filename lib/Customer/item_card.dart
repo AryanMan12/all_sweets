@@ -55,122 +55,129 @@ class _ItemCardState extends State<ItemCard> {
     if (widget.itemData.isEmpty) {
       return Container();
     }
-    return Padding(
-      padding: EdgeInsets.only(top: 15.0, bottom: 5.0, left: 5.0, right: 5.0),
-      child: InkWell(
-        onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ItemDetail(
-                      itemData: widget.itemData,
-                      userData: widget.userData,
-                    ))),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15.0),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 3.0,
-                  blurRadius: 5.0)
-            ],
-            color: Colors.white,
-          ),
-          child: Column(
-            children: [
-              Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child:
-                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    FlatButton(
-                      onPressed: () {
-                        setState(() {
-                          isFavourite = !isFavourite;
-                          List favList = widget.userData["favourite"];
-                          if (isFavourite) {
-                            favList.add(name);
-                            customers.doc(user).update({"favourite": favList});
-                          } else {
-                            favList.remove(name);
-                            customers.doc(user).update({"favourite": favList});
-                          }
-                        });
-                      },
-                      child: Icon(
-                        (isFavourite == true)
-                            ? Icons.favorite
-                            : Icons.favorite_border_outlined,
-                        color: Colors.brown,
-                      ),
-                    )
-                  ])),
-              Hero(
-                  tag: name,
-                  child: Container(
-                      height: 75.0,
-                      width: 75.0,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(imgPath),
-                              fit: BoxFit.contain)))),
-              SizedBox(height: 7.0),
-              Text(name,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Varela',
-                      fontSize: 14.0)),
-              Text("₹ $price /- ($quantity)",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Varela',
-                      fontSize: 14.0)),
-              Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Container(color: Colors.black, height: 1.0)),
-              Padding(
-                padding: EdgeInsets.only(left: 5.0, right: 5.0),
-                child: InkWell(
-                  onTap: (() {
-                    setState(() {
-                      added = !added;
-                      List cart = widget.userData["cart"];
-                      if (added) {
-                        cart.add(name);
-                        customers.doc(user).update({"cart": cart});
-                      } else {
-                        cart.remove(name);
-                        customers.doc(user).update({"cart": cart});
-                      }
-                    });
-                  }),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        if (!added) ...[
-                          Icon(Icons.shopping_basket,
-                              color: Colors.brown[400], size: 12.0),
-                          Text('Add to cart',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Varela',
-                                  fontSize: 12.0)),
-                        ],
-                        if (added) ...[
-                          Icon(Icons.remove_circle_outline,
-                              color: Colors.brown[400], size: 12.0),
-                          Text('Remove from cart',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Varela',
-                                  fontSize: 12.0)),
-                        ],
-                      ]),
+    return ListView(children: [
+      Padding(
+        padding: EdgeInsets.only(top: 15.0, bottom: 5.0, left: 5.0, right: 5.0),
+        child: InkWell(
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ItemDetail(
+                        itemData: widget.itemData,
+                        userData: widget.userData,
+                      ))),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.0),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 3.0,
+                    blurRadius: 5.0)
+              ],
+              color: Colors.white,
+            ),
+            child: Column(
+              children: [
+                Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                isFavourite = !isFavourite;
+                                List favList = widget.userData["favourite"];
+                                if (isFavourite) {
+                                  favList.add(name);
+                                  customers
+                                      .doc(user)
+                                      .update({"favourite": favList});
+                                } else {
+                                  favList.remove(name);
+                                  customers
+                                      .doc(user)
+                                      .update({"favourite": favList});
+                                }
+                              });
+                            },
+                            child: Icon(
+                              (isFavourite == true)
+                                  ? Icons.favorite
+                                  : Icons.favorite_border_outlined,
+                              color: Colors.brown,
+                            ),
+                          )
+                        ])),
+                Hero(
+                    tag: name,
+                    child: Container(
+                        height: 75.0,
+                        width: 125.0,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(imgPath),
+                                fit: BoxFit.fitWidth)))),
+                SizedBox(height: 7.0),
+                Text(name,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Varela',
+                        fontSize: 14.0)),
+                Text("₹ $price /- ($quantity)",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Varela',
+                        fontSize: 14.0)),
+                Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Container(color: Colors.black, height: 1.0)),
+                Padding(
+                  padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                  child: InkWell(
+                    onTap: (() {
+                      setState(() {
+                        added = !added;
+                        List cart = widget.userData["cart"];
+                        if (added) {
+                          cart.add(name);
+                          customers.doc(user).update({"cart": cart});
+                        } else {
+                          cart.remove(name);
+                          customers.doc(user).update({"cart": cart});
+                        }
+                      });
+                    }),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          if (!added) ...[
+                            Icon(Icons.shopping_basket,
+                                color: Colors.brown[400], size: 12.0),
+                            Text('Add to cart',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Varela',
+                                    fontSize: 12.0)),
+                          ],
+                          if (added) ...[
+                            Icon(Icons.remove_circle_outline,
+                                color: Colors.brown[400], size: 12.0),
+                            Text('Remove from cart',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Varela',
+                                    fontSize: 12.0)),
+                          ],
+                        ]),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
-    );
+    ]);
   }
 }
